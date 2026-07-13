@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Web\Admin as Admin;
+use App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Web\Auth\LoginController;
-use App\Http\Controllers\Web\Provider as Provider;
-use App\Http\Controllers\Web\Site as Site;
+use App\Http\Controllers\Web\Provider;
+use App\Http\Controllers\Web\Site;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [Site\HomeController::class, 'index'])->name('home');
+
+Route::get('/lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['ar', 'en'])) {
+        session(['locale' => $locale]);
+    }
+
+    return back();
+})->name('lang.switch');
 
 Route::get('/properties', [Site\PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property:slug}', [Site\PropertyController::class, 'show'])->name('properties.show');
