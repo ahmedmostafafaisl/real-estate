@@ -40,5 +40,8 @@ class CmsContentSeeder extends Seeder
         foreach ($faqs as $f) {
             Faq::firstOrCreate(['question' => $f['question']], $f);
         }
+
+        // Round out the FAQ list with additional generated entries for a fuller page.
+        Faq::factory()->count(10)->create();
     }
 }
