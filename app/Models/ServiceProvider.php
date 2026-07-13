@@ -10,11 +10,16 @@ class ServiceProvider extends Model
         'user_id', 'office_name', 'provider_type', 'commercial_register_no',
         'license_no', 'city_id', 'address', 'logo', 'bio',
         'verification_status', 'verified_at', 'commission_rate',
+        'notification_preferences',
     ];
 
     protected function casts(): array
     {
-        return ['verified_at' => 'datetime', 'commission_rate' => 'decimal:2'];
+        return [
+            'verified_at' => 'datetime',
+            'commission_rate' => 'decimal:2',
+            'notification_preferences' => 'array',
+        ];
     }
 
     public function user()
