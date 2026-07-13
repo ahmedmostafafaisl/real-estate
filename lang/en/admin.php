@@ -1,0 +1,188 @@
+<?php
+
+return [
+    'dashboard_title' => 'Dashboard',
+    'total_customers' => 'Total customers',
+    'verified_providers' => 'Verified providers',
+    'pending_approval_suffix' => ':count pending approval',
+    'published_properties' => 'Published properties',
+    'total_revenue' => 'Total revenue',
+    'pending_properties' => 'Pending properties',
+    'rejected_properties' => 'Rejected properties',
+    'active_subscriptions' => 'Active subscriptions',
+    'expired_subscriptions' => 'Expired subscriptions',
+    'total_commissions' => 'Total commissions',
+    'most_active_cities' => 'Most active cities',
+    'listings' => 'Listings',
+    'approvals_awaiting_review' => 'Approvals awaiting review',
+    'nothing_pending' => 'Nothing pending.',
+
+    // Properties
+    'properties_title' => 'Properties',
+    'title_col' => 'Title',
+    'provider_col' => 'Provider',
+    'approve' => 'Approve',
+    'reject' => 'Reject',
+    'reason_for_rejection' => 'Reason for rejection:',
+    'no_properties_found' => 'No properties found.',
+
+    // Taxonomy
+    'categories_types_title' => 'Categories & types',
+    'categories' => 'Categories',
+    'new_category' => 'New category',
+    'add' => 'Add',
+    'category_col' => 'Category',
+    'types_col' => 'Types',
+    'property_types' => 'Property types',
+    'new_type' => 'New type',
+    'type_col' => 'Type',
+    'property_features' => 'Property features',
+    'new_feature' => 'New feature',
+
+    // Geo
+    'cities_districts_title' => 'Cities & districts',
+    'cities' => 'Cities',
+    'new_city' => 'New city',
+    'region_col' => 'Region',
+    'city_col' => 'City',
+    'districts_col' => 'Districts',
+    'add_district' => 'Add district',
+    'district_name' => 'District name',
+
+    // Users
+    'customers_title' => 'Customers',
+    'name_col' => 'Name',
+    'email_col' => 'Email',
+    'favorites_col' => 'Favorites',
+    'suspend' => 'Suspend',
+    'activate' => 'Activate',
+    'no_customers_yet' => 'No customers yet.',
+
+    // Providers
+    'service_providers_title' => 'Service providers',
+    'office_col' => 'Office',
+    'type_col2' => 'Type',
+    'verification_col' => 'Verification',
+    'verify' => 'Verify',
+    'no_providers_yet' => 'No providers yet.',
+
+    // Roles
+    'roles_permissions_title' => 'Roles & permissions',
+    'roles' => 'Roles',
+    'new_role' => 'New role',
+    'permissions' => 'Permissions',
+    'users_suffix' => ':count users',
+    'save_changes' => 'Save changes',
+    'perm_group_users' => 'Users',
+    'perm_group_properties' => 'Properties',
+    'perm_group_subscriptions' => 'Subscriptions',
+    'perm_group_payments' => 'Payments',
+    'perm_group_commissions' => 'Commissions',
+    'perm_group_cms' => 'CMS',
+    'perm_group_settings' => 'Settings',
+    'perm_group_roles' => 'Roles',
+    'perm_action_view' => 'View',
+    'perm_action_manage' => 'Manage',
+    'perm_action_approve' => 'Approve',
+    'perm_action_refund' => 'Refund',
+    'perm_action_publish' => 'Publish',
+
+    // Subscriptions
+    'subscriptions_title' => 'Subscriptions',
+    'add_package' => 'Add package',
+    'package_name' => 'Name',
+    'package_price' => 'Price',
+    'listing_limit' => 'Listing limit',
+    'featured_slots_field' => 'Featured slots',
+    'active_subscriptions_panel' => 'Active subscriptions',
+    'plan_col' => 'Plan',
+    'renews_col' => 'Renews',
+    'no_subscriptions_yet' => 'No subscriptions yet.',
+
+    // Payments
+    'payments_invoices_title' => 'Payments & invoices',
+    'invoices' => 'Invoices',
+    'invoice_col' => 'Invoice',
+    'total_col' => 'Total',
+    'confirm_refund' => 'Refund this payment?',
+    'refund' => 'Refund',
+    'no_invoices_yet' => 'No invoices yet.',
+
+    // Commissions
+    'commissions_title' => 'Commissions',
+    'property_col' => 'Property',
+    'commission_col' => 'Commission',
+    'mark_paid' => 'Mark paid',
+    'no_commissions_yet' => 'No commissions recorded yet.',
+
+    // Viewing requests
+    'viewing_requests_title' => 'Viewing requests',
+    'customer_col' => 'Customer',
+    'slot_col' => 'Slot',
+    'no_viewing_requests_yet' => 'No viewing requests yet.',
+
+    // Reviews
+    'reviews_reports_title' => 'Reviews & reports',
+    'customer_reviews' => 'Customer reviews',
+    'rating_col' => 'Rating',
+    'comment_col' => 'Comment',
+    'publish' => 'Publish',
+    'no_reviews_yet' => 'No reviews yet.',
+    'reported_listings' => 'Reported listings',
+    'reason_col' => 'Reason',
+    'reported_by_col' => 'Reported by',
+    'resolve' => 'Resolve',
+    'no_reports_yet' => 'No reports yet.',
+
+    // Notifications
+    'notifications_title' => 'Notifications',
+    'notification_templates' => 'Notification templates',
+    'event_col' => 'Event',
+
+    // CMS
+    'cms_pages_title' => 'CMS pages',
+    'pages' => 'Pages',
+    'new_page' => 'New page',
+    'slug_col' => 'Slug',
+    'new_page_panel' => 'New page',
+    'title_field' => 'Title',
+    'content_field' => 'Content',
+    'create_page' => 'Create page',
+    'edit_prefix' => 'Edit — :title',
+    'save' => 'Save',
+    'faq_panel' => 'FAQ',
+    'question_field' => 'Question',
+    'answer_field' => 'Answer',
+
+    // Activity
+    'activity_logs_title' => 'Activity logs',
+    'no_activity_yet' => 'No activity recorded yet. Enable logging by running',
+    'actor_col' => 'Actor',
+    'action_col' => 'Action',
+    'time_col' => 'Time',
+    'system' => 'System',
+
+    // Backups
+    'backup_management_title' => 'Backup management',
+    'backups' => 'Backups',
+    'configure_via' => 'Configure and schedule via',
+    'no_backups_found' => 'No backups found. Install and configure',
+    'then_run' => 'then run',
+    'file_col' => 'File',
+    'size_col' => 'Size',
+    'created_col' => 'Created',
+
+    // Settings
+    'system_settings_title' => 'System settings',
+    'general' => 'General',
+    'platform_name' => 'Platform name',
+    'default_currency' => 'Default currency',
+    'default_tax_rate' => 'Default tax rate (%)',
+    'default_commission_rate' => 'Default commission rate (%)',
+    'support_email' => 'Support email',
+    'integrations' => 'Integrations',
+    'google_maps_key' => 'Google Maps API key',
+    'fcm_key' => 'Firebase Cloud Messaging key',
+    'payment_gateway_key' => 'Payment gateway key',
+    'save_settings' => 'Save settings',
+];

@@ -1,0 +1,52 @@
+<?php
+
+return [
+    // Shared chrome
+    'overview' => 'Overview',
+    'administrator' => 'Administrator',
+    'provider_console_subtitle' => 'Keystone Provider Console',
+    'admin_console_subtitle' => 'Keystone Admin Console',
+    'search_my_listings' => 'Search my listings…',
+    'search_platform' => 'Search platform…',
+
+    // Provider nav
+    'nav_provider_dashboard' => 'Dashboard',
+    'nav_business' => 'Business',
+    'nav_my_properties' => 'My properties',
+    'nav_customer_requests' => 'Customer requests',
+    'nav_viewing_appointments' => 'Viewing appointments',
+    'nav_messages' => 'Messages',
+    'nav_billing' => 'Billing',
+    'nav_subscription' => 'Subscription',
+    'nav_payments_invoices' => 'Payments & invoices',
+    'nav_commissions' => 'Commissions',
+    'nav_insights' => 'Insights',
+    'nav_statistics' => 'Statistics',
+    'nav_office' => 'Office',
+    'nav_office_profile' => 'Office profile',
+    'nav_employees' => 'Employees',
+    'nav_notifications' => 'Notifications',
+    'nav_account_settings' => 'Account settings',
+
+    // Admin nav
+    'nav_admin_dashboard' => 'Dashboard',
+    'nav_listings' => 'Listings',
+    'nav_properties' => 'Properties',
+    'nav_categories_types' => 'Categories & types',
+    'nav_cities_districts' => 'Cities & districts',
+    'nav_people' => 'People',
+    'nav_customers' => 'Customers',
+    'nav_service_providers' => 'Service providers',
+    'nav_roles_permissions' => 'Roles & permissions',
+    'nav_commerce' => 'Commerce',
+    'nav_subscriptions' => 'Subscriptions',
+    'nav_engagement' => 'Engagement',
+    'nav_viewing_requests' => 'Viewing requests',
+    'nav_reviews_reports' => 'Reviews & reports',
+    'nav_content' => 'Content',
+    'nav_cms_pages' => 'CMS pages',
+    'nav_system' => 'System',
+    'nav_activity_logs' => 'Activity logs',
+    'nav_backup_management' => 'Backup management',
+    'nav_system_settings' => 'System settings',
+];

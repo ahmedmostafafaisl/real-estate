@@ -1,0 +1,30 @@
+<?php
+
+// Keyed by the lowercase English status value used throughout the app.
+return [
+    'draft' => 'Draft',
+    'pending' => 'Pending',
+    'published' => 'Published',
+    'sold' => 'Sold',
+    'rented' => 'Rented',
+    'expired' => 'Expired',
+    'rejected' => 'Rejected',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'cancelled' => 'Cancelled',
+    'paid' => 'Paid',
+    'unpaid' => 'Unpaid',
+    'void' => 'Void',
+    'refunded' => 'Refunded',
+    'verified' => 'Verified',
+    'new' => 'New',
+    'responded' => 'Responded',
+    'closed' => 'Closed',
+    'requested' => 'Requested',
+    'confirmed' => 'Confirmed',
+    'completed' => 'Completed',
+    'open' => 'Open',
+    'resolved' => 'Resolved',
+    'dismissed' => 'Dismissed',
+    'read' => 'Read',
+];

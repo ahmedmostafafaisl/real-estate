@@ -1,0 +1,188 @@
+<?php
+
+return [
+    'dashboard_title' => 'الرئيسية',
+    'total_customers' => 'إجمالي العملاء',
+    'verified_providers' => 'مزوّدون موثّقون',
+    'pending_approval_suffix' => ':count بانتظار الموافقة',
+    'published_properties' => 'العقارات المنشورة',
+    'total_revenue' => 'إجمالي الإيرادات',
+    'pending_properties' => 'عقارات قيد المراجعة',
+    'rejected_properties' => 'عقارات مرفوضة',
+    'active_subscriptions' => 'اشتراكات نشطة',
+    'expired_subscriptions' => 'اشتراكات منتهية',
+    'total_commissions' => 'إجمالي العمولات',
+    'most_active_cities' => 'المدن الأكثر نشاطاً',
+    'listings' => 'العقارات',
+    'approvals_awaiting_review' => 'طلبات بانتظار المراجعة',
+    'nothing_pending' => 'لا يوجد شيء معلّق.',
+
+    // Properties
+    'properties_title' => 'العقارات',
+    'title_col' => 'العنوان',
+    'provider_col' => 'المزوّد',
+    'approve' => 'موافقة',
+    'reject' => 'رفض',
+    'reason_for_rejection' => 'سبب الرفض:',
+    'no_properties_found' => 'لا توجد عقارات.',
+
+    // Taxonomy
+    'categories_types_title' => 'التصنيفات والأنواع',
+    'categories' => 'التصنيفات',
+    'new_category' => 'تصنيف جديد',
+    'add' => 'إضافة',
+    'category_col' => 'التصنيف',
+    'types_col' => 'الأنواع',
+    'property_types' => 'أنواع العقارات',
+    'new_type' => 'نوع جديد',
+    'type_col' => 'النوع',
+    'property_features' => 'مميزات العقار',
+    'new_feature' => 'ميزة جديدة',
+
+    // Geo
+    'cities_districts_title' => 'المدن والأحياء',
+    'cities' => 'المدن',
+    'new_city' => 'مدينة جديدة',
+    'region_col' => 'المنطقة',
+    'city_col' => 'المدينة',
+    'districts_col' => 'الأحياء',
+    'add_district' => 'إضافة حي',
+    'district_name' => 'اسم الحي',
+
+    // Users
+    'customers_title' => 'العملاء',
+    'name_col' => 'الاسم',
+    'email_col' => 'البريد الإلكتروني',
+    'favorites_col' => 'المفضّلة',
+    'suspend' => 'تعليق',
+    'activate' => 'تفعيل',
+    'no_customers_yet' => 'لا يوجد عملاء بعد.',
+
+    // Providers
+    'service_providers_title' => 'مزوّدو الخدمة',
+    'office_col' => 'المكتب',
+    'type_col2' => 'النوع',
+    'verification_col' => 'التوثيق',
+    'verify' => 'توثيق',
+    'no_providers_yet' => 'لا يوجد مزوّدون بعد.',
+
+    // Roles
+    'roles_permissions_title' => 'الأدوار والصلاحيات',
+    'roles' => 'الأدوار',
+    'new_role' => 'دور جديد',
+    'permissions' => 'الصلاحيات',
+    'users_suffix' => ':count مستخدم',
+    'save_changes' => 'حفظ التغييرات',
+    'perm_group_users' => 'المستخدمون',
+    'perm_group_properties' => 'العقارات',
+    'perm_group_subscriptions' => 'الاشتراكات',
+    'perm_group_payments' => 'المدفوعات',
+    'perm_group_commissions' => 'العمولات',
+    'perm_group_cms' => 'المحتوى',
+    'perm_group_settings' => 'الإعدادات',
+    'perm_group_roles' => 'الأدوار',
+    'perm_action_view' => 'عرض',
+    'perm_action_manage' => 'إدارة',
+    'perm_action_approve' => 'موافقة',
+    'perm_action_refund' => 'استرداد',
+    'perm_action_publish' => 'نشر',
+
+    // Subscriptions
+    'subscriptions_title' => 'الاشتراكات',
+    'add_package' => 'إضافة باقة',
+    'package_name' => 'الاسم',
+    'package_price' => 'السعر',
+    'listing_limit' => 'حد العقارات',
+    'featured_slots_field' => 'فرص التمييز',
+    'active_subscriptions_panel' => 'الاشتراكات النشطة',
+    'plan_col' => 'الباقة',
+    'renews_col' => 'يتجدد في',
+    'no_subscriptions_yet' => 'لا توجد اشتراكات بعد.',
+
+    // Payments
+    'payments_invoices_title' => 'المدفوعات والفواتير',
+    'invoices' => 'الفواتير',
+    'invoice_col' => 'الفاتورة',
+    'total_col' => 'الإجمالي',
+    'confirm_refund' => 'هل تريد استرداد هذه الدفعة؟',
+    'refund' => 'استرداد',
+    'no_invoices_yet' => 'لا توجد فواتير بعد.',
+
+    // Commissions
+    'commissions_title' => 'العمولات',
+    'property_col' => 'العقار',
+    'commission_col' => 'العمولة',
+    'mark_paid' => 'تحديد كمدفوع',
+    'no_commissions_yet' => 'لا توجد عمولات مسجّلة بعد.',
+
+    // Viewing requests
+    'viewing_requests_title' => 'طلبات المعاينة',
+    'customer_col' => 'العميل',
+    'slot_col' => 'الموعد',
+    'no_viewing_requests_yet' => 'لا توجد طلبات معاينة بعد.',
+
+    // Reviews
+    'reviews_reports_title' => 'التقييمات والتقارير',
+    'customer_reviews' => 'تقييمات العملاء',
+    'rating_col' => 'التقييم',
+    'comment_col' => 'التعليق',
+    'publish' => 'نشر',
+    'no_reviews_yet' => 'لا توجد تقييمات بعد.',
+    'reported_listings' => 'العقارات المُبلَّغ عنها',
+    'reason_col' => 'السبب',
+    'reported_by_col' => 'المُبلِّغ',
+    'resolve' => 'حل',
+    'no_reports_yet' => 'لا توجد تقارير بعد.',
+
+    // Notifications
+    'notifications_title' => 'الإشعارات',
+    'notification_templates' => 'قوالب الإشعارات',
+    'event_col' => 'الحدث',
+
+    // CMS
+    'cms_pages_title' => 'صفحات المحتوى',
+    'pages' => 'الصفحات',
+    'new_page' => 'صفحة جديدة',
+    'slug_col' => 'الرابط',
+    'new_page_panel' => 'صفحة جديدة',
+    'title_field' => 'العنوان',
+    'content_field' => 'المحتوى',
+    'create_page' => 'إنشاء الصفحة',
+    'edit_prefix' => 'تعديل — :title',
+    'save' => 'حفظ',
+    'faq_panel' => 'الأسئلة الشائعة',
+    'question_field' => 'السؤال',
+    'answer_field' => 'الإجابة',
+
+    // Activity
+    'activity_logs_title' => 'سجل النشاطات',
+    'no_activity_yet' => 'لا توجد نشاطات مسجّلة بعد. فعّل السجل بتشغيل',
+    'actor_col' => 'المستخدم',
+    'action_col' => 'الإجراء',
+    'time_col' => 'الوقت',
+    'system' => 'النظام',
+
+    // Backups
+    'backup_management_title' => 'إدارة النسخ الاحتياطي',
+    'backups' => 'النسخ الاحتياطية',
+    'configure_via' => 'قم بالإعداد والجدولة عبر',
+    'no_backups_found' => 'لا توجد نسخ احتياطية. قم بتثبيت وإعداد',
+    'then_run' => 'ثم شغّل',
+    'file_col' => 'الملف',
+    'size_col' => 'الحجم',
+    'created_col' => 'تاريخ الإنشاء',
+
+    // Settings
+    'system_settings_title' => 'إعدادات النظام',
+    'general' => 'عام',
+    'platform_name' => 'اسم المنصة',
+    'default_currency' => 'العملة الافتراضية',
+    'default_tax_rate' => 'نسبة الضريبة الافتراضية (%)',
+    'default_commission_rate' => 'نسبة العمولة الافتراضية (%)',
+    'support_email' => 'بريد الدعم الفني',
+    'integrations' => 'التكاملات',
+    'google_maps_key' => 'مفتاح Google Maps API',
+    'fcm_key' => 'مفتاح Firebase Cloud Messaging',
+    'payment_gateway_key' => 'مفتاح بوابة الدفع',
+    'save_settings' => 'حفظ الإعدادات',
+];

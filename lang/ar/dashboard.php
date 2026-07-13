@@ -1,0 +1,52 @@
+<?php
+
+return [
+    // Shared chrome
+    'overview' => 'نظرة عامة',
+    'administrator' => 'مسؤول',
+    'provider_console_subtitle' => 'لوحة مزوّد الخدمة — Keystone',
+    'admin_console_subtitle' => 'لوحة الإدارة — Keystone',
+    'search_my_listings' => 'ابحث في عقاراتي…',
+    'search_platform' => 'ابحث في المنصة…',
+
+    // Provider nav
+    'nav_provider_dashboard' => 'الرئيسية',
+    'nav_business' => 'الأعمال',
+    'nav_my_properties' => 'عقاراتي',
+    'nav_customer_requests' => 'طلبات العملاء',
+    'nav_viewing_appointments' => 'مواعيد المعاينة',
+    'nav_messages' => 'الرسائل',
+    'nav_billing' => 'الفواتير',
+    'nav_subscription' => 'الاشتراك',
+    'nav_payments_invoices' => 'المدفوعات والفواتير',
+    'nav_commissions' => 'العمولات',
+    'nav_insights' => 'التحليلات',
+    'nav_statistics' => 'الإحصائيات',
+    'nav_office' => 'المكتب',
+    'nav_office_profile' => 'ملف المكتب',
+    'nav_employees' => 'الموظفون',
+    'nav_notifications' => 'الإشعارات',
+    'nav_account_settings' => 'إعدادات الحساب',
+
+    // Admin nav
+    'nav_admin_dashboard' => 'الرئيسية',
+    'nav_listings' => 'العقارات',
+    'nav_properties' => 'العقارات',
+    'nav_categories_types' => 'التصنيفات والأنواع',
+    'nav_cities_districts' => 'المدن والأحياء',
+    'nav_people' => 'المستخدمون',
+    'nav_customers' => 'العملاء',
+    'nav_service_providers' => 'مزوّدو الخدمة',
+    'nav_roles_permissions' => 'الأدوار والصلاحيات',
+    'nav_commerce' => 'التجارة',
+    'nav_subscriptions' => 'الاشتراكات',
+    'nav_engagement' => 'التفاعل',
+    'nav_viewing_requests' => 'طلبات المعاينة',
+    'nav_reviews_reports' => 'التقييمات والتقارير',
+    'nav_content' => 'المحتوى',
+    'nav_cms_pages' => 'صفحات المحتوى',
+    'nav_system' => 'النظام',
+    'nav_activity_logs' => 'سجل النشاطات',
+    'nav_backup_management' => 'إدارة النسخ الاحتياطي',
+    'nav_system_settings' => 'إعدادات النظام',
+];

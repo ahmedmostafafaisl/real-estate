@@ -1,7 +1,7 @@
-<x-admin-layout title="Notifications">
-    <x-panel title="Notification templates">
+<x-admin-layout :title="__('admin.notifications_title')">
+    <x-panel :title="__('admin.notification_templates')">
         <table class="w-full text-sm">
-            <thead><tr class="text-[11px] uppercase text-textfaint text-left"><th class="pb-2 px-2">Event</th><th class="pb-2 px-2 text-right">Push</th><th class="pb-2 px-2 text-right">Email</th><th class="pb-2 px-2 text-right">SMS</th><th class="pb-2 px-2 text-right">WhatsApp</th></tr></thead>
+            <thead><tr class="text-[11px] uppercase text-textfaint text-left"><th class="pb-2 px-2">{{ __('admin.event_col') }}</th><th class="pb-2 px-2 text-right">Push</th><th class="pb-2 px-2 text-right">Email</th><th class="pb-2 px-2 text-right">SMS</th><th class="pb-2 px-2 text-right">WhatsApp</th></tr></thead>
             <tbody>
             @foreach ($templates as $t)
                 <tr class="border-t border-linesoft">
