@@ -1,5 +1,5 @@
-<x-provider-layout title="Office profile">
-    <x-panel title="Office profile">
+<x-provider-layout :title="__('provider.office_profile')">
+    <x-panel :title="__('provider.office_profile')">
         <form action="{{ route('provider.profile.update') }}" method="POST" class="flex gap-6">
             @csrf @method('PATCH')
             <div class="w-[84px] h-[84px] rounded-xl bg-brasssoft flex items-center justify-center flex-shrink-0">
@@ -7,21 +7,21 @@
             </div>
             <div class="flex-1 flex flex-col gap-3.5">
                 <div class="grid grid-cols-2 gap-3.5">
-                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">Office name</span><input name="office_name" value="{{ $provider->office_name }}" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
-                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">Provider type</span>
+                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.office_name') }}</span><input name="office_name" value="{{ $provider->office_name }}" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
+                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.provider_type') }}</span>
                         <select name="provider_type" class="border border-line rounded-md px-2.5 py-2 text-sm">
-                            @foreach (['agency','broker','owner','developer'] as $t)<option value="{{ $t }}" @selected($provider->provider_type === $t)>{{ ucfirst($t) }}</option>@endforeach
+                            @foreach (['agency','broker','owner','developer'] as $t)<option value="{{ $t }}" @selected($provider->provider_type === $t)>{{ __('common.'.$t) }}</option>@endforeach
                         </select></label>
                 </div>
                 <div class="grid grid-cols-2 gap-3.5">
-                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">City</span>
+                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('common.city') }}</span>
                         <select name="city_id" class="border border-line rounded-md px-2.5 py-2 text-sm">
                             @foreach ($cities as $city)<option value="{{ $city->id }}" @selected($provider->city_id == $city->id)>{{ $city->name }}</option>@endforeach
                         </select></label>
-                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">Address</span><input name="address" value="{{ $provider->address }}" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
+                    <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.address') }}</span><input name="address" value="{{ $provider->address }}" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
                 </div>
-                <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">Bio</span><textarea name="bio" rows="3" class="border border-line rounded-md px-2.5 py-2 text-sm">{{ $provider->bio }}</textarea></label>
-                <div class="flex justify-end"><button class="bg-ink text-white rounded-md px-3.5 py-2 text-xs font-semibold">Save changes</button></div>
+                <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.bio') }}</span><textarea name="bio" rows="3" class="border border-line rounded-md px-2.5 py-2 text-sm">{{ $provider->bio }}</textarea></label>
+                <div class="flex justify-end"><button class="bg-ink text-white rounded-md px-3.5 py-2 text-xs font-semibold">{{ __('common.save_changes') }}</button></div>
             </div>
         </form>
     </x-panel>

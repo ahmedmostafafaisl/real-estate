@@ -1,12 +1,12 @@
-<x-site-layout title="Property categories — Keystone">
+<x-site-layout :title="__('site.property_categories')">
     <div class="max-w-6xl mx-auto px-6 py-10">
-        <h1 class="font-serif text-3xl mb-6">Property categories</h1>
+        <h1 class="font-serif text-3xl mb-6">{{ __('site.property_categories') }}</h1>
         <div class="flex flex-col gap-6">
             @foreach ($categories as $c)
                 <div class="bg-white border border-line rounded-xl p-5">
                     <div class="flex items-center justify-between mb-3">
                         <div class="font-serif text-xl">{{ $c->name }}</div>
-                        <span class="text-xs text-textfaint">{{ $c->properties_count }} listings</span>
+                        <span class="text-xs text-textfaint">{{ __('site.listings_count', ['count' => $c->properties_count]) }}</span>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                         @foreach ($c->types as $t)

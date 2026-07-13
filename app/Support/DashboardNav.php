@@ -29,34 +29,34 @@ class DashboardNav
             'key' => '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
         ];
 
-        return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . ($paths[$name] ?? $paths['grid']) . '</svg>';
+        return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'.($paths[$name] ?? $paths['grid']).'</svg>';
     }
 
     public static function provider(): array
     {
         return [
-            'Overview' => [
-                ['label' => 'Dashboard', 'route' => 'provider.dashboard', 'url' => route('provider.dashboard'), 'icon' => self::icon('grid')],
+            __('dashboard.overview') => [
+                ['label' => __('dashboard.nav_provider_dashboard'), 'route' => 'provider.dashboard', 'url' => route('provider.dashboard'), 'icon' => self::icon('grid')],
             ],
-            'Business' => [
-                ['label' => 'My properties', 'route' => 'provider.properties.*', 'url' => route('provider.properties.index'), 'icon' => self::icon('building')],
-                ['label' => 'Customer requests', 'route' => 'provider.inquiries.*', 'url' => route('provider.inquiries.index'), 'icon' => self::icon('message')],
-                ['label' => 'Viewing appointments', 'route' => 'provider.viewings.*', 'url' => route('provider.viewings.index'), 'icon' => self::icon('calendar')],
-                ['label' => 'Messages', 'route' => 'provider.messages', 'url' => route('provider.messages'), 'icon' => self::icon('mail')],
+            __('dashboard.nav_business') => [
+                ['label' => __('dashboard.nav_my_properties'), 'route' => 'provider.properties.*', 'url' => route('provider.properties.index'), 'icon' => self::icon('building')],
+                ['label' => __('dashboard.nav_customer_requests'), 'route' => 'provider.inquiries.*', 'url' => route('provider.inquiries.index'), 'icon' => self::icon('message')],
+                ['label' => __('dashboard.nav_viewing_appointments'), 'route' => 'provider.viewings.*', 'url' => route('provider.viewings.index'), 'icon' => self::icon('calendar')],
+                ['label' => __('dashboard.nav_messages'), 'route' => 'provider.messages', 'url' => route('provider.messages'), 'icon' => self::icon('mail')],
             ],
-            'Billing' => [
-                ['label' => 'Subscription', 'route' => 'provider.subscription', 'url' => route('provider.subscription'), 'icon' => self::icon('card')],
-                ['label' => 'Payments & invoices', 'route' => 'provider.invoices.*', 'url' => route('provider.invoices.index'), 'icon' => self::icon('receipt')],
-                ['label' => 'Commissions', 'route' => 'provider.commissions', 'url' => route('provider.commissions'), 'icon' => self::icon('percent')],
+            __('dashboard.nav_billing') => [
+                ['label' => __('dashboard.nav_subscription'), 'route' => 'provider.subscription', 'url' => route('provider.subscription'), 'icon' => self::icon('card')],
+                ['label' => __('dashboard.nav_payments_invoices'), 'route' => 'provider.invoices.*', 'url' => route('provider.invoices.index'), 'icon' => self::icon('receipt')],
+                ['label' => __('dashboard.nav_commissions'), 'route' => 'provider.commissions', 'url' => route('provider.commissions'), 'icon' => self::icon('percent')],
             ],
-            'Insights' => [
-                ['label' => 'Statistics', 'route' => 'provider.statistics', 'url' => route('provider.statistics'), 'icon' => self::icon('chart')],
+            __('dashboard.nav_insights') => [
+                ['label' => __('dashboard.nav_statistics'), 'route' => 'provider.statistics', 'url' => route('provider.statistics'), 'icon' => self::icon('chart')],
             ],
-            'Office' => [
-                ['label' => 'Office profile', 'route' => 'provider.profile', 'url' => route('provider.profile'), 'icon' => self::icon('building')],
-                ['label' => 'Employees', 'route' => 'provider.employees.*', 'url' => route('provider.employees.index'), 'icon' => self::icon('users')],
-                ['label' => 'Notifications', 'route' => 'provider.notifications', 'url' => route('provider.notifications'), 'icon' => self::icon('bell')],
-                ['label' => 'Account settings', 'route' => 'provider.settings', 'url' => route('provider.settings'), 'icon' => self::icon('settings')],
+            __('dashboard.nav_office') => [
+                ['label' => __('dashboard.nav_office_profile'), 'route' => 'provider.profile', 'url' => route('provider.profile'), 'icon' => self::icon('building')],
+                ['label' => __('dashboard.nav_employees'), 'route' => 'provider.employees.*', 'url' => route('provider.employees.index'), 'icon' => self::icon('users')],
+                ['label' => __('dashboard.nav_notifications'), 'route' => 'provider.notifications', 'url' => route('provider.notifications'), 'icon' => self::icon('bell')],
+                ['label' => __('dashboard.nav_account_settings'), 'route' => 'provider.settings', 'url' => route('provider.settings'), 'icon' => self::icon('settings')],
             ],
         ];
     }
@@ -64,36 +64,36 @@ class DashboardNav
     public static function admin(): array
     {
         return [
-            'Overview' => [
-                ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'url' => route('admin.dashboard'), 'icon' => self::icon('grid')],
+            __('dashboard.overview') => [
+                ['label' => __('dashboard.nav_admin_dashboard'), 'route' => 'admin.dashboard', 'url' => route('admin.dashboard'), 'icon' => self::icon('grid')],
             ],
-            'Listings' => [
-                ['label' => 'Properties', 'route' => 'admin.properties.*', 'url' => route('admin.properties.index'), 'icon' => self::icon('building')],
-                ['label' => 'Categories & types', 'route' => 'admin.taxonomy', 'url' => route('admin.taxonomy'), 'icon' => self::icon('layers')],
-                ['label' => 'Cities & districts', 'route' => 'admin.geo', 'url' => route('admin.geo'), 'icon' => self::icon('globe')],
+            __('dashboard.nav_listings') => [
+                ['label' => __('dashboard.nav_properties'), 'route' => 'admin.properties.*', 'url' => route('admin.properties.index'), 'icon' => self::icon('building')],
+                ['label' => __('dashboard.nav_categories_types'), 'route' => 'admin.taxonomy', 'url' => route('admin.taxonomy'), 'icon' => self::icon('layers')],
+                ['label' => __('dashboard.nav_cities_districts'), 'route' => 'admin.geo', 'url' => route('admin.geo'), 'icon' => self::icon('globe')],
             ],
-            'People' => [
-                ['label' => 'Customers', 'route' => 'admin.users', 'url' => route('admin.users'), 'icon' => self::icon('users')],
-                ['label' => 'Service providers', 'route' => 'admin.providers.*', 'url' => route('admin.providers.index'), 'icon' => self::icon('shield')],
-                ['label' => 'Roles & permissions', 'route' => 'admin.roles', 'url' => route('admin.roles'), 'icon' => self::icon('key')],
+            __('dashboard.nav_people') => [
+                ['label' => __('dashboard.nav_customers'), 'route' => 'admin.users', 'url' => route('admin.users'), 'icon' => self::icon('users')],
+                ['label' => __('dashboard.nav_service_providers'), 'route' => 'admin.providers.*', 'url' => route('admin.providers.index'), 'icon' => self::icon('shield')],
+                ['label' => __('dashboard.nav_roles_permissions'), 'route' => 'admin.roles', 'url' => route('admin.roles'), 'icon' => self::icon('key')],
             ],
-            'Commerce' => [
-                ['label' => 'Subscriptions', 'route' => 'admin.subscriptions', 'url' => route('admin.subscriptions'), 'icon' => self::icon('card')],
-                ['label' => 'Payments & invoices', 'route' => 'admin.payments', 'url' => route('admin.payments'), 'icon' => self::icon('receipt')],
-                ['label' => 'Commissions', 'route' => 'admin.commissions', 'url' => route('admin.commissions'), 'icon' => self::icon('percent')],
+            __('dashboard.nav_commerce') => [
+                ['label' => __('dashboard.nav_subscriptions'), 'route' => 'admin.subscriptions', 'url' => route('admin.subscriptions'), 'icon' => self::icon('card')],
+                ['label' => __('dashboard.nav_payments_invoices'), 'route' => 'admin.payments', 'url' => route('admin.payments'), 'icon' => self::icon('receipt')],
+                ['label' => __('dashboard.nav_commissions'), 'route' => 'admin.commissions', 'url' => route('admin.commissions'), 'icon' => self::icon('percent')],
             ],
-            'Engagement' => [
-                ['label' => 'Viewing requests', 'route' => 'admin.viewing-requests', 'url' => route('admin.viewing-requests'), 'icon' => self::icon('calendar')],
-                ['label' => 'Reviews & reports', 'route' => 'admin.reviews', 'url' => route('admin.reviews'), 'icon' => self::icon('star')],
-                ['label' => 'Notifications', 'route' => 'admin.notifications', 'url' => route('admin.notifications'), 'icon' => self::icon('bell')],
+            __('dashboard.nav_engagement') => [
+                ['label' => __('dashboard.nav_viewing_requests'), 'route' => 'admin.viewing-requests', 'url' => route('admin.viewing-requests'), 'icon' => self::icon('calendar')],
+                ['label' => __('dashboard.nav_reviews_reports'), 'route' => 'admin.reviews', 'url' => route('admin.reviews'), 'icon' => self::icon('star')],
+                ['label' => __('dashboard.nav_notifications'), 'route' => 'admin.notifications', 'url' => route('admin.notifications'), 'icon' => self::icon('bell')],
             ],
-            'Content' => [
-                ['label' => 'CMS pages', 'route' => 'admin.cms', 'url' => route('admin.cms'), 'icon' => self::icon('file')],
+            __('dashboard.nav_content') => [
+                ['label' => __('dashboard.nav_cms_pages'), 'route' => 'admin.cms', 'url' => route('admin.cms'), 'icon' => self::icon('file')],
             ],
-            'System' => [
-                ['label' => 'Activity logs', 'route' => 'admin.activity', 'url' => route('admin.activity'), 'icon' => self::icon('activity')],
-                ['label' => 'Backup management', 'route' => 'admin.backups', 'url' => route('admin.backups'), 'icon' => self::icon('database')],
-                ['label' => 'System settings', 'route' => 'admin.settings', 'url' => route('admin.settings'), 'icon' => self::icon('settings')],
+            __('dashboard.nav_system') => [
+                ['label' => __('dashboard.nav_activity_logs'), 'route' => 'admin.activity', 'url' => route('admin.activity'), 'icon' => self::icon('activity')],
+                ['label' => __('dashboard.nav_backup_management'), 'route' => 'admin.backups', 'url' => route('admin.backups'), 'icon' => self::icon('database')],
+                ['label' => __('dashboard.nav_system_settings'), 'route' => 'admin.settings', 'url' => route('admin.settings'), 'icon' => self::icon('settings')],
             ],
         ];
     }

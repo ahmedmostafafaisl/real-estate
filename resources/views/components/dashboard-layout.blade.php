@@ -3,19 +3,19 @@
     'title' => 'Dashboard',
     'subtitle' => 'Keystone Console',
     'searchAction' => '#',
-    'searchPlaceholder' => 'Search…',
+    'searchPlaceholder' => null,
 ])
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ $title ?? 'Dashboard' }} — Keystone</title>
+<title>{{ $title }} — Keystone</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
   tailwind.config = {
@@ -45,6 +45,11 @@
   [x-cloak] { display: none !important; }
   ::-webkit-scrollbar { height: 8px; width: 8px; }
   ::-webkit-scrollbar-thumb { background: #DDE2DF; border-radius: 8px; }
+  @if (app()->getLocale() === 'ar')
+    body { font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
+    .font-serif { font-family: 'Cairo', 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Sans Arabic', 'IBM Plex Mono', monospace; }
+  @endif
 </style>
 </head>
 <body class="bg-canvas text-ktext font-sans antialiased" x-data="{ sidebarCollapsed: false }">
@@ -89,18 +94,22 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5B6472" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div>
-          <div class="font-serif text-xl">{{ $title ?? 'Dashboard' }}</div>
-          <div class="text-xs text-textfaint">{{ $subtitle ?? 'Keystone Console' }}</div>
+          <div class="font-serif text-xl">{{ $title }}</div>
+          <div class="text-xs text-textfaint">{{ $subtitle }}</div>
         </div>
       </div>
       <div class="flex items-center gap-2.5">
-        <form action="{{ $searchAction ?? '#' }}" method="GET" class="flex items-center gap-1.5 bg-white border border-line rounded-md px-3 py-1.5 w-[220px]">
+        <div class="flex items-center text-[11px] font-semibold border border-line rounded-full overflow-hidden">
+          <a href="{{ route('lang.switch', 'ar') }}" class="px-2 py-1 {{ app()->getLocale() === 'ar' ? 'bg-ink text-white' : 'text-textmute bg-white' }}">AR</a>
+          <a href="{{ route('lang.switch', 'en') }}" class="px-2 py-1 {{ app()->getLocale() === 'en' ? 'bg-ink text-white' : 'text-textmute bg-white' }}">EN</a>
+        </div>
+        <form action="{{ $searchAction }}" method="GET" class="flex items-center gap-1.5 bg-white border border-line rounded-md px-3 py-1.5 w-[220px]">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A929C" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input name="q" value="{{ request('q') }}" placeholder="{{ $searchPlaceholder ?? 'Search…' }}" class="text-xs text-ktext placeholder:text-textfaint outline-none bg-transparent flex-1">
+          <input name="q" value="{{ request('q') }}" placeholder="{{ $searchPlaceholder ?? __('common.search') }}" class="text-xs text-ktext placeholder:text-textfaint outline-none bg-transparent flex-1">
         </form>
         <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <button class="border border-line bg-white rounded-md px-3 py-1.5 text-xs font-semibold text-textmute">Log out</button>
+          <button class="border border-line bg-white rounded-md px-3 py-1.5 text-xs font-semibold text-textmute">{{ __('common.log_out') }}</button>
         </form>
       </div>
     </div>

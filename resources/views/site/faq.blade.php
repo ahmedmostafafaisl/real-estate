@@ -1,6 +1,6 @@
-<x-site-layout title="FAQ — Keystone">
+<x-site-layout :title="__('site.faq_title')">
     <div class="max-w-3xl mx-auto px-6 py-14" x-data="{ open: null }">
-        <h1 class="font-serif text-3xl mb-8">Frequently asked questions</h1>
+        <h1 class="font-serif text-3xl mb-8">{{ __('site.faq_title') }}</h1>
         <div class="flex flex-col gap-2">
             @foreach ($faqs as $i => $f)
                 <div class="bg-white border border-line rounded-xl">
