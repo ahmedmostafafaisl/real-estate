@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             PropertyTaxonomySeeder::class,
             SubscriptionPackageSeeder::class,
             NotificationTemplateSeeder::class,
+            CmsContentSeeder::class,
         ]);
     }
 }

@@ -35,8 +35,8 @@ class LoginController extends Controller
             return redirect()->intended(route('provider.dashboard'));
         }
 
-        Auth::logout();
-        return back()->withErrors(['email' => 'This account has no dashboard access.']);
+        // Customers have no back-office dashboard — they browse the public site.
+        return redirect()->intended(route('home'));
     }
 
     public function destroy(Request $request)

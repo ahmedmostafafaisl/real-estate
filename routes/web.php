@@ -3,10 +3,42 @@
 use App\Http\Controllers\Web\Admin as Admin;
 use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Provider as Provider;
+use App\Http\Controllers\Web\Site as Site;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('login');
+/*
+|--------------------------------------------------------------------------
+| Public website — Section 8 of the spec
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [Site\HomeController::class, 'index'])->name('home');
+
+Route::get('/properties', [Site\PropertyController::class, 'index'])->name('properties.index');
+Route::get('/properties/{property:slug}', [Site\PropertyController::class, 'show'])->name('properties.show');
+
+Route::get('/cities', [Site\CityController::class, 'index'])->name('cities.index');
+Route::get('/categories', [Site\CategoryController::class, 'index'])->name('categories.index');
+
+Route::get('/providers', [Site\ProviderController::class, 'index'])->name('providers.index');
+Route::get('/providers/{serviceProvider}', [Site\ProviderController::class, 'show'])->name('providers.show');
+
+Route::get('/pricing', [Site\PackageController::class, 'index'])->name('packages.index');
+
+Route::get('/about', [Site\PageController::class, 'about'])->name('about');
+Route::get('/contact', [Site\PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [Site\PageController::class, 'submitContact'])->name('contact.submit');
+Route::get('/faq', [Site\PageController::class, 'faq'])->name('faq');
+Route::get('/privacy-policy', [Site\PageController::class, 'privacy'])->name('privacy');
+Route::get('/terms-conditions', [Site\PageController::class, 'terms'])->name('terms');
+
+Route::get('/register', [Site\RegisterController::class, 'create'])->name('register');
+Route::post('/register', [Site\RegisterController::class, 'store'])->name('register.store');
+Route::get('/register/provider', [Site\RegisterController::class, 'createProvider'])->name('register.provider');
+Route::post('/register/provider', [Site\RegisterController::class, 'storeProvider'])->name('register.provider.store');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/properties/{property}/inquiries', [Site\PropertyController::class, 'storeInquiry'])->name('properties.inquiries.store');
+    Route::post('/properties/{property}/viewing-requests', [Site\PropertyController::class, 'storeViewingRequest'])->name('properties.viewing-requests.store');
 });
 
 Route::middleware('guest')->group(function () {
