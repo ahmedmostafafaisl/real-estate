@@ -46,6 +46,14 @@ return [
     'bathrooms' => 'Bathrooms',
     'save_as_draft' => 'Save as draft',
     'save_and_submit' => 'Save and submit for review',
+    'photos' => 'Photos',
+    'existing_photos' => 'Current photos',
+    'add_photos' => 'Add photos',
+    'add_photos_hint' => 'JPG or PNG, up to 5MB each.',
+    'featured_photo' => 'Featured',
+    'make_featured' => 'Make featured',
+    'remove_photo' => 'Remove',
+    'no_photos_yet' => 'No photos uploaded yet.',
 
     // Inquiries
     'customer_requests' => 'Customer requests',

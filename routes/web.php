@@ -116,6 +116,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/properties', [Admin\PropertyController::class, 'index'])->name('properties.index');
     Route::post('/properties/{property}/approve', [Admin\PropertyController::class, 'approve'])->name('properties.approve');
     Route::post('/properties/{property}/reject', [Admin\PropertyController::class, 'reject'])->name('properties.reject');
+    Route::get('/properties/{property}/photos', [Admin\PropertyController::class, 'photos'])->name('properties.photos');
+    Route::delete('/properties/{property}/photos/{image}', [Admin\PropertyController::class, 'destroyPhoto'])->name('properties.photos.destroy');
 
     Route::get('/taxonomy', [Admin\TaxonomyController::class, 'index'])->name('taxonomy');
     Route::post('/taxonomy/categories', [Admin\TaxonomyController::class, 'storeCategory'])->name('taxonomy.categories.store');

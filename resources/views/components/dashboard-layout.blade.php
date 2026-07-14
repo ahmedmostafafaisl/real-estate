@@ -45,6 +45,12 @@
   [x-cloak] { display: none !important; }
   ::-webkit-scrollbar { height: 8px; width: 8px; }
   ::-webkit-scrollbar-thumb { background: #DDE2DF; border-radius: 8px; }
+  /* Headers were hardcoded to physical text-left, which doesn't flip with dir="rtl",
+     while data cells use the browser's default logical "start" alignment (which does
+     flip correctly). That mismatch is what makes header labels drift away from their
+     column. Forcing both to the same logical alignment guarantees they always match,
+     in either language, on every table across the app. */
+  table th, table td { text-align: start !important; }
   @if (app()->getLocale() === 'ar')
     body { font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
     .font-serif { font-family: 'Cairo', 'Fraunces', serif; }

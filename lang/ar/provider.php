@@ -46,6 +46,14 @@ return [
     'bathrooms' => 'الحمامات',
     'save_as_draft' => 'حفظ كمسودة',
     'save_and_submit' => 'حفظ وإرسال للمراجعة',
+    'photos' => 'الصور',
+    'existing_photos' => 'الصور الحالية',
+    'add_photos' => 'إضافة صور',
+    'add_photos_hint' => 'بصيغة JPG أو PNG، بحد أقصى 5 ميجابايت لكل صورة.',
+    'featured_photo' => 'الصورة الرئيسية',
+    'make_featured' => 'اجعلها رئيسية',
+    'remove_photo' => 'إزالة',
+    'no_photos_yet' => 'لم يتم رفع أي صور بعد.',
 
     // Inquiries
     'customer_requests' => 'طلبات العملاء',

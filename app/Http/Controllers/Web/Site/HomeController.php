@@ -13,12 +13,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $featured = Property::with('city')->where('status', 'published')->where('is_featured', true)
+        $featured = Property::with('city', 'images')->where('status', 'published')->where('is_featured', true)
             ->latest()->limit(6)->get();
 
         if ($featured->count() < 3) {
             $featured = $featured->merge(
-                Property::with('city')->where('status', 'published')->latest()->limit(6)->get()
+                Property::with('city', 'images')->where('status', 'published')->latest()->limit(6)->get()
             )->unique('id')->take(6);
         }
 

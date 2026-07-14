@@ -7,7 +7,7 @@
             @endforeach
         </div>
         <table class="w-full text-sm">
-            <thead><tr class="text-[11px] uppercase text-textfaint text-left"><th class="pb-2 px-2">{{ __('provider.id') }}</th><th class="pb-2 px-2">{{ __('admin.title_col') }}</th><th class="pb-2 px-2">{{ __('common.city') }}</th><th class="pb-2 px-2">{{ __('admin.provider_col') }}</th><th class="pb-2 px-2">{{ __('common.status') }}</th><th class="pb-2 px-2"></th></tr></thead>
+            <thead><tr class="text-[11px] uppercase text-textfaint"><th class="pb-2 px-2">{{ __('provider.id') }}</th><th class="pb-2 px-2">{{ __('admin.title_col') }}</th><th class="pb-2 px-2">{{ __('common.city') }}</th><th class="pb-2 px-2">{{ __('admin.provider_col') }}</th><th class="pb-2 px-2">{{ __('common.status') }}</th><th class="pb-2 px-2">{{ __('common.actions') }}</th></tr></thead>
             <tbody>
             @forelse ($properties as $p)
                 <tr class="border-t border-linesoft">
@@ -16,11 +16,14 @@
                     <td class="py-2.5 px-2">{{ $p->city->name }}</td>
                     <td class="py-2.5 px-2">{{ $p->serviceProvider->office_name }}</td>
                     <td class="py-2.5 px-2"><x-badge :status="ucfirst($p->status)" /></td>
-                    <td class="py-2.5 px-2 text-right whitespace-nowrap">
-                        @if ($p->status === 'pending')
-                        <form action="{{ route('admin.properties.approve', $p) }}" method="POST" class="inline">@csrf<button class="text-ksuccess text-xs font-semibold ms-2">{{ __('admin.approve') }}</button></form>
-                        <form action="{{ route('admin.properties.reject', $p) }}" method="POST" class="inline" onsubmit="return promptReject(this)">@csrf<input type="hidden" name="reason" value=""><button class="text-kdanger text-xs font-semibold">{{ __('admin.reject') }}</button></form>
-                        @endif
+                    <td class="py-2.5 px-2">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <x-action-pill :href="route('admin.properties.photos', $p)">{{ __('admin.manage_photos') }}</x-action-pill>
+                            @if ($p->status === 'pending')
+                            <form action="{{ route('admin.properties.approve', $p) }}" method="POST">@csrf<x-action-pill tone="success">{{ __('admin.approve') }}</x-action-pill></form>
+                            <form action="{{ route('admin.properties.reject', $p) }}" method="POST" onsubmit="return promptReject(this)">@csrf<input type="hidden" name="reason" value=""><x-action-pill tone="danger">{{ __('admin.reject') }}</x-action-pill></form>
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @empty

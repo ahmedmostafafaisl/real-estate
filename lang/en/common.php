@@ -38,6 +38,7 @@ return [
     'description' => 'Description',
     'features' => 'Features',
     'status' => 'Status',
+    'actions' => 'Actions',
 
     'for_sale' => 'For sale',
     'for_rent' => 'For rent',

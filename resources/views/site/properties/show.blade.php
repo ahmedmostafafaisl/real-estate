@@ -1,8 +1,21 @@
 <x-site-layout :title="$property->title">
     <div class="max-w-6xl mx-auto px-6 py-10">
-        <div class="h-72 bg-gradient-to-br from-brasssoft to-tealsoft rounded-xl flex items-center justify-center mb-6">
-            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#B8862E" stroke-width="1.4"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/></svg>
-        </div>
+        @if ($property->images->isNotEmpty())
+            <div class="grid grid-cols-4 gap-2 mb-6">
+                <div class="col-span-3 h-72 rounded-xl overflow-hidden">
+                    <img src="{{ asset('storage/' . ($property->images->firstWhere('is_featured', true) ?? $property->images->first())->path) }}" alt="" class="w-full h-full object-cover">
+                </div>
+                <div class="flex flex-col gap-2">
+                    @foreach ($property->images->reject(fn ($i) => $i->is_featured)->take(3) as $thumb)
+                        <div class="h-[88px] rounded-lg overflow-hidden"><img src="{{ asset('storage/' . $thumb->path) }}" alt="" class="w-full h-full object-cover"></div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <div class="h-72 bg-gradient-to-br from-brasssoft to-tealsoft rounded-xl flex items-center justify-center mb-6">
+                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#B8862E" stroke-width="1.4"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/></svg>
+            </div>
+        @endif
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="md:col-span-2">

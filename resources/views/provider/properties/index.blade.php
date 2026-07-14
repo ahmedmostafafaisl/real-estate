@@ -13,10 +13,10 @@
 
         <table class="w-full text-sm">
             <thead>
-                <tr class="text-[11px] uppercase text-textfaint text-left">
+                <tr class="text-[11px] uppercase text-textfaint">
                     <th class="pb-2 px-2">{{ __('provider.id') }}</th><th class="pb-2 px-2">{{ __('provider.listing') }}</th><th class="pb-2 px-2">{{ __('common.city') }}</th>
                     <th class="pb-2 px-2 text-right">{{ __('common.price') }}</th><th class="pb-2 px-2 text-right">{{ __('provider.views') }}</th>
-                    <th class="pb-2 px-2">{{ __('provider.lifecycle') }}</th><th class="pb-2 px-2">{{ __('common.status') }}</th><th class="pb-2 px-2"></th>
+                    <th class="pb-2 px-2">{{ __('provider.lifecycle') }}</th><th class="pb-2 px-2">{{ __('common.status') }}</th><th class="pb-2 px-2">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,14 +29,16 @@
                     <td class="py-2.5 px-2 text-right">{{ $p->views_count }}</td>
                     <td class="py-2.5 px-2"><x-lifecycle-arch :status="ucfirst($p->status)" /></td>
                     <td class="py-2.5 px-2"><x-badge :status="ucfirst($p->status)" /></td>
-                    <td class="py-2.5 px-2 text-right whitespace-nowrap">
-                        <a href="{{ route('provider.properties.edit', $p) }}" class="text-textmute text-xs font-semibold ms-2">{{ __('common.edit') }}</a>
-                        @if ($p->status === 'draft')
-                            <form action="{{ route('provider.properties.submit', $p) }}" method="POST" class="inline"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button class="text-teal text-xs font-semibold ms-2">{{ __('provider.submit') }}</button></form>
-                        @elseif ($p->status === 'published')
-                            <form action="{{ route('provider.properties.pause', $p) }}" method="POST" class="inline">@csrf<button class="text-kwarning text-xs font-semibold ms-2">{{ __('provider.pause') }}</button></form>
-                        @endif
-                        <form action="{{ route('provider.properties.destroy', $p) }}" method="POST" class="inline" onsubmit="return confirm('{{ __('provider.confirm_delete_listing') }}')">@csrf @method('DELETE')<button class="text-kdanger text-xs font-semibold">{{ __('common.delete') }}</button></form>
+                    <td class="py-2.5 px-2">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <x-action-pill :href="route('provider.properties.edit', $p)">{{ __('common.edit') }}</x-action-pill>
+                            @if ($p->status === 'draft')
+                                <form action="{{ route('provider.properties.submit', $p) }}" method="POST">@csrf<x-action-pill tone="info">{{ __('provider.submit') }}</x-action-pill></form>
+                            @elseif ($p->status === 'published')
+                                <form action="{{ route('provider.properties.pause', $p) }}" method="POST">@csrf<x-action-pill tone="warning">{{ __('provider.pause') }}</x-action-pill></form>
+                            @endif
+                            <form action="{{ route('provider.properties.destroy', $p) }}" method="POST" onsubmit="return confirm('{{ __('provider.confirm_delete_listing') }}')">@csrf @method('DELETE')<x-action-pill tone="danger">{{ __('common.delete') }}</x-action-pill></form>
+                        </div>
                     </td>
                 </tr>
             @empty

@@ -205,4 +205,8 @@ return [
     'flash_property_rejected' => 'تم رفض العقار.',
     'flash_settings_saved' => 'تم حفظ الإعدادات.',
     'flash_notification_updated' => 'تم تحديث قالب الإشعار.',
+    'manage_photos' => 'إدارة الصور',
+    'flash_photo_removed' => 'تمت إزالة الصورة.',
+    'photos_for' => 'صور — :title',
+    'back_to_properties' => 'العودة إلى العقارات',
 ];

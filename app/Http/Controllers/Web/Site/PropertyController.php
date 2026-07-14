@@ -14,7 +14,7 @@ class PropertyController extends Controller
     // Doubles as both "Property Search" (empty filters) and "Search Results" (filters applied).
     public function index(Request $request)
     {
-        $properties = Property::with('city', 'type')
+        $properties = Property::with('city', 'type', 'images')
             ->where('status', 'published')
             ->when($request->q, fn ($q, $v) => $q->where('title', 'like', "%{$v}%"))
             ->when($request->city_id, fn ($q, $v) => $q->where('city_id', $v))
@@ -40,7 +40,7 @@ class PropertyController extends Controller
         $property->increment('views_count');
         $property->load('city', 'district', 'category', 'type', 'images', 'features', 'serviceProvider');
 
-        $similar = Property::where('status', 'published')->where('city_id', $property->city_id)
+        $similar = Property::with('images')->where('status', 'published')->where('city_id', $property->city_id)
             ->where('id', '!=', $property->id)->limit(3)->get();
 
         return view('site.properties.show', compact('property', 'similar'));
@@ -52,7 +52,7 @@ class PropertyController extends Controller
 
         $property->inquiries()->create(['user_id' => $request->user()->id, 'message' => $data['message']]);
 
-        return back()->with('status', __('site.inquiry_sent'));
+        return back()->with('status', 'Your message has been sent to the provider.');
     }
 
     public function storeViewingRequest(Property $property, Request $request)
@@ -66,6 +66,6 @@ class PropertyController extends Controller
             'requested_slot' => $data['requested_slot'],
         ]);
 
-        return back()->with('status', __('site.viewing_requested'));
+        return back()->with('status', 'Viewing requested — the provider will confirm a time with you.');
     }
 }

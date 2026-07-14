@@ -38,6 +38,7 @@ return [
     'description' => 'الوصف',
     'features' => 'المميزات',
     'status' => 'الحالة',
+    'actions' => 'الإجراءات',
 
     'for_sale' => 'للبيع',
     'for_rent' => 'للإيجار',
