@@ -11,6 +11,7 @@ class SettingController extends Controller
     public function index()
     {
         $settings = SystemSetting::pluck('value', 'key');
+
         return view('admin.settings', compact('settings'));
     }
 
@@ -22,6 +23,6 @@ class SettingController extends Controller
             SystemSetting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
 
-        return back()->with('status', 'Settings saved.');
+        return back()->with('status', __('admin.flash_settings_saved'));
     }
 }

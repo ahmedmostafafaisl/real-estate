@@ -21,13 +21,15 @@ class RoleController extends Controller
     {
         $data = $request->validate(['name' => ['required', 'string', 'unique:roles,name']]);
         Role::create(['name' => $data['name'], 'guard_name' => 'web']);
-        return back()->with('status', 'Role created.');
+
+        return back()->with('status', __('admin.flash_role_created'));
     }
 
     public function syncPermissions(Role $role, Request $request)
     {
         $data = $request->validate(['permissions' => ['nullable', 'array']]);
         $role->syncPermissions($data['permissions'] ?? []);
+
         return back()->with('status', "Permissions updated for {$role->name}.");
     }
 }

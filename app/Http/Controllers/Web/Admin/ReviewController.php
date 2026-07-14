@@ -21,12 +21,14 @@ class ReviewController extends Controller
     {
         $data = $request->validate(['status' => ['required', 'in:published,rejected']]);
         $review->update($data);
-        return back()->with('status', 'Review moderated.');
+
+        return back()->with('status', __('admin.flash_review_moderated'));
     }
 
     public function resolve(PropertyReport $report)
     {
         $report->update(['status' => 'resolved']);
-        return back()->with('status', 'Report resolved.');
+
+        return back()->with('status', __('admin.flash_report_resolved'));
     }
 }

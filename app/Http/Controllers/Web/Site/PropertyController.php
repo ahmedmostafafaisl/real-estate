@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Web\Site;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Property;
-use App\Models\PropertyCategory;
 use App\Models\PropertyType;
+use App\Models\ViewingRequest;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -52,20 +52,20 @@ class PropertyController extends Controller
 
         $property->inquiries()->create(['user_id' => $request->user()->id, 'message' => $data['message']]);
 
-        return back()->with('status', 'Your message has been sent to the provider.');
+        return back()->with('status', __('site.inquiry_sent'));
     }
 
     public function storeViewingRequest(Property $property, Request $request)
     {
         $data = $request->validate(['requested_slot' => ['required', 'date', 'after:now']]);
 
-        \App\Models\ViewingRequest::create([
+        ViewingRequest::create([
             'property_id' => $property->id,
             'user_id' => $request->user()->id,
             'service_provider_id' => $property->service_provider_id,
             'requested_slot' => $data['requested_slot'],
         ]);
 
-        return back()->with('status', 'Viewing requested — the provider will confirm a time with you.');
+        return back()->with('status', __('site.viewing_requested'));
     }
 }

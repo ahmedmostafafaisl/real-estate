@@ -31,6 +31,7 @@ class SubscriptionController extends Controller
         ]);
 
         SubscriptionPackage::create([...$data, 'slug' => Str::slug($data['name']), 'billing_cycle' => 'monthly']);
-        return back()->with('status', 'Package created.');
+
+        return back()->with('status', __('admin.flash_package_created'));
     }
 }

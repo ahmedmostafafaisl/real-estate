@@ -25,7 +25,7 @@ class InvoiceController extends Controller
 
         Payment::create([
             'invoice_id' => $invoice->id,
-            'transaction_ref' => 'TXN-' . strtoupper(Str::random(10)),
+            'transaction_ref' => 'TXN-'.strtoupper(Str::random(10)),
             'method' => $data['method'],
             'amount' => $invoice->total,
             'status' => 'paid',
@@ -34,6 +34,6 @@ class InvoiceController extends Controller
 
         $invoice->update(['status' => 'paid']);
 
-        return back()->with('status', 'Payment received — invoice marked as paid.');
+        return back()->with('status', __('provider.flash_payment_received'));
     }
 }

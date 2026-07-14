@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Web\Provider;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Commission;
 use App\Models\Property;
 use App\Models\PropertyCategory;
 use App\Models\PropertyFeature;
-use App\Models\PropertyType;
-use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -28,7 +28,7 @@ class PropertyController extends Controller
     public function create()
     {
         return view('provider.properties.form', [
-            'property' => new Property(),
+            'property' => new Property,
             'categories' => PropertyCategory::with('types')->get(),
             'cities' => City::all(),
             'features' => PropertyFeature::all(),
@@ -56,7 +56,7 @@ class PropertyController extends Controller
 
         $property = $provider->properties()->create([
             ...$data,
-            'slug' => Str::slug($data['title']) . '-' . Str::random(6),
+            'slug' => Str::slug($data['title']).'-'.Str::random(6),
             'status' => $submit ? 'pending' : 'draft',
         ]);
 
@@ -64,7 +64,7 @@ class PropertyController extends Controller
             $property->features()->sync($data['features']);
         }
 
-        return redirect()->route('provider.properties.index')->with('status', 'Listing created.');
+        return redirect()->route('provider.properties.index')->with('status', __('provider.flash_listing_created'));
     }
 
     public function edit(Property $property, Request $request)
@@ -97,7 +97,7 @@ class PropertyController extends Controller
         $property->update($data);
         $property->features()->sync($data['features'] ?? []);
 
-        return redirect()->route('provider.properties.index')->with('status', 'Listing updated.');
+        return redirect()->route('provider.properties.index')->with('status', __('provider.flash_listing_updated'));
     }
 
     public function destroy(Property $property, Request $request)
@@ -105,7 +105,7 @@ class PropertyController extends Controller
         abort_unless($property->service_provider_id === $request->user()->serviceProvider->id, 403);
         $property->delete();
 
-        return redirect()->route('provider.properties.index')->with('status', 'Listing deleted.');
+        return redirect()->route('provider.properties.index')->with('status', __('provider.flash_listing_deleted'));
     }
 
     public function submit(Property $property, Request $request)
@@ -113,7 +113,7 @@ class PropertyController extends Controller
         abort_unless($property->service_provider_id === $request->user()->serviceProvider->id, 403);
         $property->submitForReview();
 
-        return back()->with('status', 'Submitted for review.');
+        return back()->with('status', __('provider.flash_submitted_review'));
     }
 
     public function pause(Property $property, Request $request)
@@ -121,7 +121,7 @@ class PropertyController extends Controller
         abort_unless($property->service_provider_id === $request->user()->serviceProvider->id, 403);
         $property->update(['status' => 'draft']);
 
-        return back()->with('status', 'Listing paused.');
+        return back()->with('status', __('provider.flash_listing_paused'));
     }
 
     public function closeDeal(Property $property, Request $request)
@@ -130,8 +130,8 @@ class PropertyController extends Controller
         $data = $request->validate(['deal_type' => ['required', 'in:sold,rented']]);
 
         $property->update(['status' => $data['deal_type']]);
-        \App\Models\Commission::generateFor($property);
+        Commission::generateFor($property);
 
-        return back()->with('status', 'Deal recorded and commission generated.');
+        return back()->with('status', __('provider.flash_deal_recorded'));
     }
 }

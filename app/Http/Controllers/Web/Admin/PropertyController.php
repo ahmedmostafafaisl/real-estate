@@ -21,13 +21,15 @@ class PropertyController extends Controller
     public function approve(Property $property)
     {
         $property->approve();
-        return back()->with('status', 'Property approved and published.');
+
+        return back()->with('status', __('admin.flash_property_approved'));
     }
 
     public function reject(Property $property, Request $request)
     {
         $data = $request->validate(['reason' => ['required', 'string', 'max:500']]);
         $property->reject($data['reason']);
-        return back()->with('status', 'Property rejected.');
+
+        return back()->with('status', __('admin.flash_property_rejected'));
     }
 }

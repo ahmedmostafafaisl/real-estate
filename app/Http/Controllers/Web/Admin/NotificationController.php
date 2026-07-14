@@ -11,6 +11,7 @@ class NotificationController extends Controller
     public function index()
     {
         $templates = NotificationTemplate::all();
+
         return view('admin.notifications', compact('templates'));
     }
 
@@ -30,6 +31,6 @@ class NotificationController extends Controller
             'whatsapp_enabled' => $request->boolean('whatsapp_enabled'),
         ]);
 
-        return back()->with('status', 'Notification template updated.');
+        return back()->with('status', __('admin.flash_notification_updated'));
     }
 }

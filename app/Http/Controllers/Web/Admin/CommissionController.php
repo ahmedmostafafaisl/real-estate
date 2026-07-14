@@ -20,6 +20,7 @@ class CommissionController extends Controller
     public function markPaid(Commission $commission)
     {
         $commission->update(['status' => 'paid', 'paid_at' => now()]);
-        return back()->with('status', 'Commission marked as paid.');
+
+        return back()->with('status', __('admin.flash_commission_paid'));
     }
 }

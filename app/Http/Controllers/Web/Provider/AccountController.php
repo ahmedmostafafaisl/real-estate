@@ -17,13 +17,13 @@ class AccountController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email,' . $request->user()->id],
+            'email' => ['required', 'email', 'unique:users,email,'.$request->user()->id],
             'phone' => ['nullable', 'string'],
         ]);
 
         $request->user()->update($data);
 
-        return back()->with('status', 'Account details saved.');
+        return back()->with('status', __('provider.flash_account_saved'));
     }
 
     public function updatePassword(Request $request)
@@ -31,6 +31,6 @@ class AccountController extends Controller
         $data = $request->validate(['password' => ['required', 'string', 'min:8', 'confirmed']]);
         $request->user()->update(['password' => Hash::make($data['password'])]);
 
-        return back()->with('status', 'Password changed.');
+        return back()->with('status', __('provider.flash_password_changed'));
     }
 }

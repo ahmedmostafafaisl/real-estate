@@ -24,6 +24,6 @@ class InquiryController extends Controller
         abort_unless($inquiry->property->service_provider_id === $request->user()->serviceProvider->id, 403);
         $inquiry->update(['status' => 'responded']);
 
-        return back()->with('status', 'Marked as responded.');
+        return back()->with('status', __('provider.flash_inquiry_responded'));
     }
 }

@@ -25,7 +25,8 @@ class GeoController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
         City::create($data);
-        return back()->with('status', 'City added.');
+
+        return back()->with('status', __('admin.flash_city_added'));
     }
 
     public function storeDistrict(Request $request)
@@ -35,6 +36,7 @@ class GeoController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
         District::create($data);
-        return back()->with('status', 'District added.');
+
+        return back()->with('status', __('admin.flash_district_added'));
     }
 }

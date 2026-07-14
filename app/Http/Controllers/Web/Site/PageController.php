@@ -13,12 +13,14 @@ class PageController extends Controller
     public function about()
     {
         $page = CmsPage::where('slug', 'about-us')->where('status', 'published')->first();
-        return view('site.page', ['title' => 'About Us', 'page' => $page]);
+
+        return view('site.page', ['title' => __('site.about_title'), 'page' => $page]);
     }
 
     public function contact()
     {
         $page = CmsPage::where('slug', 'contact-us')->where('status', 'published')->first();
+
         return view('site.contact', ['page' => $page]);
     }
 
@@ -33,24 +35,27 @@ class PageController extends Controller
 
         ContactMessage::create($data);
 
-        return back()->with('status', 'Thanks — we\'ve received your message and will get back to you soon.');
+        return back()->with('status', __('site.contact_thanks'));
     }
 
     public function faq()
     {
         $faqs = Faq::where('is_active', true)->orderBy('sort_order')->get();
+
         return view('site.faq', compact('faqs'));
     }
 
     public function privacy()
     {
         $page = CmsPage::where('slug', 'privacy-policy')->where('status', 'published')->first();
-        return view('site.page', ['title' => 'Privacy Policy', 'page' => $page]);
+
+        return view('site.page', ['title' => __('site.privacy_title'), 'page' => $page]);
     }
 
     public function terms()
     {
         $page = CmsPage::where('slug', 'terms-conditions')->where('status', 'published')->first();
-        return view('site.page', ['title' => 'Terms & Conditions', 'page' => $page]);
+
+        return view('site.page', ['title' => __('site.terms_title'), 'page' => $page]);
     }
 }

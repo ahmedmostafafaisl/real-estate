@@ -22,6 +22,7 @@ class PaymentController extends Controller
     {
         $payment->update(['status' => 'refunded']);
         $payment->invoice->update(['status' => 'refunded']);
-        return back()->with('status', 'Payment refunded.');
+
+        return back()->with('status', __('admin.flash_payment_refunded'));
     }
 }

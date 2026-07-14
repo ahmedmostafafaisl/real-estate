@@ -24,6 +24,6 @@ class NotificationController extends Controller
 
         $provider->update(['notification_preferences' => $data['preferences']]);
 
-        return back()->with('status', 'Notification preferences saved.');
+        return back()->with('status', __('provider.flash_notifications_saved'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Provider;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProviderEmployee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -25,14 +26,14 @@ class EmployeeController extends Controller
 
         $request->user()->serviceProvider->employees()->create($data);
 
-        return back()->with('status', 'Employee added.');
+        return back()->with('status', __('provider.flash_employee_added'));
     }
 
-    public function destroy(\App\Models\ProviderEmployee $employee, Request $request)
+    public function destroy(ProviderEmployee $employee, Request $request)
     {
         abort_unless($employee->service_provider_id === $request->user()->serviceProvider->id, 403);
         $employee->delete();
 
-        return back()->with('status', 'Employee removed.');
+        return back()->with('status', __('provider.flash_employee_removed'));
     }
 }

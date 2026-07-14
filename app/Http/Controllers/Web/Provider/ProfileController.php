@@ -30,6 +30,6 @@ class ProfileController extends Controller
 
         $provider->update($data);
 
-        return back()->with('status', 'Office profile updated.');
+        return back()->with('status', __('provider.flash_profile_updated'));
     }
 }

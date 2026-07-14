@@ -21,7 +21,7 @@ class LoginController extends Controller
         ]);
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
-            return back()->withErrors(['email' => 'Those credentials don\'t match our records.'])->onlyInput('email');
+            return back()->withErrors(['email' => __('auth.bad_credentials')])->onlyInput('email');
         }
 
         $request->session()->regenerate();

@@ -23,6 +23,6 @@ class ViewingController extends Controller
         $data = $request->validate(['status' => ['required', 'in:confirmed,completed,cancelled']]);
         $viewingRequest->update($data);
 
-        return back()->with('status', 'Viewing updated.');
+        return back()->with('status', __('provider.flash_viewing_updated'));
     }
 }

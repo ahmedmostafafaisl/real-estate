@@ -35,7 +35,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('status', 'Welcome to Keystone — your account is ready.');
+        return redirect()->route('home')->with('status', __('site.welcome_message'));
     }
 
     public function createProvider()
@@ -70,6 +70,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('status', 'Application submitted — an admin will verify your office shortly.');
+        return redirect()->route('home')->with('status', __('site.application_submitted'));
     }
 }

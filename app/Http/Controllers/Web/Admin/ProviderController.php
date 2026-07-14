@@ -20,12 +20,14 @@ class ProviderController extends Controller
     public function verify(ServiceProvider $serviceProvider)
     {
         $serviceProvider->update(['verification_status' => 'verified', 'verified_at' => now()]);
-        return back()->with('status', 'Provider verified.');
+
+        return back()->with('status', __('admin.flash_provider_verified'));
     }
 
     public function reject(ServiceProvider $serviceProvider)
     {
         $serviceProvider->update(['verification_status' => 'rejected']);
-        return back()->with('status', 'Provider rejected.');
+
+        return back()->with('status', __('admin.flash_provider_rejected'));
     }
 }
