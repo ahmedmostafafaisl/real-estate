@@ -1,50 +1,41 @@
-<x-admin-layout :title="__('admin.roles_permissions_title')">
-    <div class="grid grid-cols-[260px_1fr] gap-3.5" x-data="{ active: '{{ $roles->first()->name ?? '' }}' }">
-        <x-panel :title="__('admin.roles')">
-            <x-slot:action>
-                <form action="{{ route('admin.roles.store') }}" method="POST" class="flex gap-1">@csrf
-                    <input name="name" placeholder="{{ __('admin.new_role') }}" class="border border-line rounded-md px-2 py-1 text-xs w-[90px]">
-                    <button class="bg-ink text-white rounded-md px-2 py-1 text-xs font-semibold">+</button>
-                </form>
-            </x-slot:action>
-            <div class="flex flex-col gap-0.5">
-                @foreach ($roles as $role)
-                    <button @click="active = '{{ $role->name }}'" :class="active === '{{ $role->name }}' ? 'bg-brasssoft text-brass' : ''" class="flex justify-between items-center text-left px-2.5 py-2 rounded-md text-sm font-medium">
-                        {{ $role->name }} <span class="text-[11px] text-textfaint">{{ __('admin.users_suffix', ['count' => $role->users_count]) }}</span>
-                    </button>
-                @endforeach
-            </div>
+<x-admin-layout :title="__('admin.reviews_reports_title')">
+    <div class="flex flex-col gap-3.5">
+        <x-panel :title="__('admin.customer_reviews')">
+            <table class="w-full text-sm"><thead><tr class="text-[11px] uppercase text-textfaint text-left"><th class="pb-2">{{ __('admin.property_col') }}</th><th class="pb-2">{{ __('admin.customer_col') }}</th><th class="pb-2">{{ __('admin.rating_col') }}</th><th class="pb-2">{{ __('admin.comment_col') }}</th><th class="pb-2">{{ __('common.status') }}</th><th class="pb-2"></th></tr></thead><tbody>
+                @forelse ($reviews as $r)
+                    <tr class="border-t border-linesoft">
+                        <td class="py-2.5">{{ $r->property->title }}</td><td class="py-2.5">{{ $r->user->name }}</td>
+                        <td class="py-2.5">{{ str_repeat('★', $r->rating) }}{{ str_repeat('☆', 5 - $r->rating) }}</td>
+                        <td class="py-2.5 text-textmute">{{ $r->comment }}</td><td class="py-2.5"><x-badge :status="ucfirst($r->status)" /></td>
+                        <td class="py-2.5 text-right whitespace-nowrap">
+                            @if ($r->status === 'pending')
+                            <form action="{{ route('admin.reviews.moderate', $r) }}" method="POST" class="inline">@csrf @method('PATCH')<input type="hidden" name="status" value="published"><button class="text-ksuccess text-xs font-semibold ms-2">{{ __('admin.publish') }}</button></form>
+                            <form action="{{ route('admin.reviews.moderate', $r) }}" method="POST" class="inline">@csrf @method('PATCH')<input type="hidden" name="status" value="rejected"><button class="text-kdanger text-xs font-semibold">{{ __('admin.reject') }}</button></form>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="6" class="py-6 text-center text-textfaint">{{ __('admin.no_reviews_yet') }}</td></tr>
+                @endforelse
+            </tbody></table>
         </x-panel>
-        <x-panel :title="__('admin.permissions')">
-            @foreach ($roles as $role)
-                <div x-show="active === '{{ $role->name }}'" x-cloak>
-                    <form action="{{ route('admin.roles.permissions', $role) }}" method="POST" class="flex flex-col gap-4">
-                        @csrf @method('PUT')
-                        @php $rolePerms = $role->permissions->pluck('name')->toArray(); @endphp
-                        @php $groups = $permissions->groupBy(fn($p) => explode('.', $p->name)[0]); @endphp
-                        @foreach ($groups as $group => $perms)
-                            <div>
-                                @php $groupKey = 'admin.perm_group_'.$group; @endphp
-                                <div class="text-xs font-semibold mb-2">{{ \Illuminate\Support\Facades\Lang::has($groupKey) ? __($groupKey) : ucfirst($group) }}</div>
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach ($perms as $perm)
-                                        @php
-                                            $action = \Illuminate\Support\Str::after($perm->name, '.');
-                                            $actionKey = 'admin.perm_action_'.$action;
-                                            $actionLabel = \Illuminate\Support\Facades\Lang::has($actionKey) ? __($actionKey) : ucfirst($action);
-                                        @endphp
-                                        <label class="relative flex items-center gap-1.5 text-[12.5px] border rounded-full px-3 py-1.5 cursor-pointer border-line text-textmute has-[:checked]:bg-brasssoft has-[:checked]:border-brass has-[:checked]:text-brass">
-                                            <input type="checkbox" name="permissions[]" value="{{ $perm->name }}" @checked(in_array($perm->name, $rolePerms)) class="hidden">
-                                            {{ $actionLabel }}
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
-                        <div><button class="bg-ink text-white rounded-md px-3.5 py-2 text-xs font-semibold">{{ __('admin.save_changes') }}</button></div>
-                    </form>
-                </div>
-            @endforeach
+        <x-panel :title="__('admin.reported_listings')">
+            <x-slot:action><x-badge status="Pending" /></x-slot:action>
+            <table class="w-full text-sm"><thead><tr class="text-[11px] uppercase text-textfaint text-left"><th class="pb-2">{{ __('admin.property_col') }}</th><th class="pb-2">{{ __('admin.reason_col') }}</th><th class="pb-2">{{ __('admin.reported_by_col') }}</th><th class="pb-2">{{ __('common.status') }}</th><th class="pb-2"></th></tr></thead><tbody>
+                @forelse ($reports as $r)
+                    <tr class="border-t border-linesoft">
+                        <td class="py-2.5">{{ $r->property->title }}</td><td class="py-2.5">{{ $r->reason }}</td><td class="py-2.5">{{ $r->user->name }}</td>
+                        <td class="py-2.5"><x-badge :status="ucfirst($r->status)" /></td>
+                        <td class="py-2.5 text-right">
+                            @if ($r->status === 'open')
+                            <form action="{{ route('admin.reports.resolve', $r) }}" method="POST">@csrf<button class="text-ksuccess text-xs font-semibold">{{ __('admin.resolve') }}</button></form>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="5" class="py-6 text-center text-textfaint">{{ __('admin.no_reports_yet') }}</td></tr>
+                @endforelse
+            </tbody></table>
         </x-panel>
     </div>
 </x-admin-layout>
