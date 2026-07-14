@@ -26,8 +26,8 @@ return new class extends Migration
             $table->foreignId('service_provider_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subscription_package_id')->constrained();
             $table->enum('status', ['active', 'expired', 'cancelled'])->default('active');
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
             $table->boolean('auto_renew')->default(true);
             $table->timestamps();
 

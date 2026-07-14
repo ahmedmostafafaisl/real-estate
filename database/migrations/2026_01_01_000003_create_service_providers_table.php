@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->text('bio')->nullable();
             $table->enum('verification_status', ['pending', 'verified', 'rejected'])->default('pending');
-            $table->timestamp('verified_at')->nullable();
+            $table->dateTime('verified_at')->nullable();
             $table->decimal('commission_rate', 5, 2)->default(2.00);
             $table->timestamps();
         });

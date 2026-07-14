@@ -26,8 +26,8 @@ class CmsController extends Controller
             'status' => ['required', 'in:draft,published'],
         ]);
 
-        // Str::slug() can't transliterate Arabic titles — fall back to a random slug.
-        $slug = Str::slug($data['title'], '-', 'en') ?: Str::lower(Str::random(8));
+        // Same fix as TaxonomyController: always append a suffix, not just on empty transliteration.
+        $slug = trim((Str::slug($data['title'], '-', 'en') ?: 'page').'-'.Str::lower(Str::random(6)), '-');
         CmsPage::create([...$data, 'slug' => $slug]);
 
         return back()->with('status', __('admin.flash_page_created'));

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('property_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('service_provider_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('requested_slot');
+            $table->dateTime('requested_slot');
             $table->enum('status', ['requested', 'confirmed', 'completed', 'cancelled'])->default('requested');
             $table->text('notes')->nullable();
             $table->timestamps();

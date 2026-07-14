@@ -20,11 +20,13 @@ class TaxonomyController extends Controller
         return view('admin.taxonomy', compact('categories', 'types', 'features'));
     }
 
-    // Str::slug() can't transliterate Arabic input, so it can return an empty string —
-    // fall back to a random slug rather than risk a duplicate-empty-slug collision.
+    // Str::slug() can't transliterate Arabic input (falls back to empty), and even when
+    // it does transliterate, similar names would collide — always append a short suffix.
     protected function slugOrRandom(string $value): string
     {
-        return Str::slug($value, '-', 'en') ?: Str::lower(Str::random(8));
+        $base = Str::slug($value, '-', 'en') ?: 'item';
+
+        return trim($base.'-'.Str::lower(Str::random(6)), '-');
     }
 
     public function storeCategory(Request $request)

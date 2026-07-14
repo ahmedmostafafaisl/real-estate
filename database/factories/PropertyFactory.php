@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\City;
+use App\Models\Property;
 use App\Models\PropertyType;
 use App\Models\ServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -10,9 +11,10 @@ use Illuminate\Support\Str;
 
 class PropertyFactory extends Factory
 {
-    protected $model = \App\Models\Property::class;
+    protected $model = Property::class;
 
     protected static array $adjectives = ['عصرية', 'واسعة', 'مريحة', 'فاخرة', 'حديثة التجديد', 'أنيقة', 'جذابة', 'معاصرة'];
+
     protected static array $descTemplates = [
         ':adj تقع في موقع مميز في :city، قريبة من الخدمات الأساسية والمرافق العامة. تتميز بتشطيبات عالية الجودة وتصميم عملي يناسب احتياجات السكن أو العمل.',
         'وحدة :adj في :city ضمن مجمع هادئ، مع سهولة الوصول إلى الطرق الرئيسية والمدارس والأسواق. مناسبة للعائلات الباحثة عن الراحة والخصوصية.',
@@ -29,8 +31,8 @@ class PropertyFactory extends Factory
         $adjective = fake()->randomElement(self::$adjectives);
 
         $bedrooms = fake()->boolean(80) ? fake()->numberBetween(1, 6) : null;
-        $title = trim(($type->name ?? 'عقار') . ' ' . $adjective .
-            ($bedrooms ? " - {$bedrooms} غرف" : '') . ' في ' . $cityName);
+        $title = trim(($type->name ?? 'عقار').' '.$adjective.
+            ($bedrooms ? " - {$bedrooms} غرف" : '').' في '.$cityName);
 
         $status = fake()->randomElement([
             'draft', 'pending', 'published', 'published', 'published', 'published',
@@ -50,7 +52,7 @@ class PropertyFactory extends Factory
             'city_id' => $city->id ?? 1,
             'district_id' => $district?->id,
             'title' => $title,
-            'slug' => Str::slug($title, '-', 'en') ?: 'property-' . Str::lower(Str::random(8)),
+            'slug' => trim((Str::slug($title, '-', 'en') ?: 'property').'-'.Str::lower(Str::random(6)), '-'),
             'description' => $description,
             'listing_type' => fake()->randomElement(['sale', 'rent']),
             'price' => fake()->numberBetween(150, 2500) * 1000,

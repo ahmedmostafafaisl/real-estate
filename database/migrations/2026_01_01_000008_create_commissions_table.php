@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('commission_rate', 5, 2);
             $table->decimal('commission_amount', 12, 2);
             $table->enum('status', ['pending', 'paid'])->default('pending');
-            $table->timestamp('paid_at')->nullable();
+            $table->dateTime('paid_at')->nullable();
             $table->timestamps();
         });
     }

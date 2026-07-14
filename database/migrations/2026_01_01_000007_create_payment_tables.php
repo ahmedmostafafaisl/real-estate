@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('tax_amount', 12, 2);
             $table->decimal('total', 12, 2);
             $table->enum('status', ['unpaid', 'paid', 'void', 'refunded'])->default('unpaid');
-            $table->timestamp('due_at')->nullable();
+            $table->dateTime('due_at')->nullable();
             $table->timestamps();
         });
 
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->decimal('amount', 12, 2);
             $table->enum('status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
             $table->json('gateway_response')->nullable();
-            $table->timestamp('paid_at')->nullable();
+            $table->dateTime('paid_at')->nullable();
             $table->timestamps();
         });
     }

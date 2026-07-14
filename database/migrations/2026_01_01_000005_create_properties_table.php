@@ -29,11 +29,11 @@ return new class extends Migration
             $table->decimal('longitude', 10, 7)->nullable();
 
             $table->enum('status', ['draft', 'pending', 'published', 'sold', 'rented', 'expired', 'rejected'])
-                  ->default('draft');
+                ->default('draft');
             $table->text('rejection_reason')->nullable();
             $table->boolean('is_featured')->default(false);
-            $table->timestamp('published_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
+            $table->dateTime('published_at')->nullable();
+            $table->dateTime('expires_at')->nullable();
             $table->unsignedInteger('views_count')->default(0);
 
             $table->timestamps();
