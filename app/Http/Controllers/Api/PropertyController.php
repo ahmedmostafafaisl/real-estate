@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
+use App\Models\Commission;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PropertyController extends Controller
@@ -50,6 +52,18 @@ class PropertyController extends Controller
         return new PropertyResource($property);
     }
 
+    // GET /api/provider/properties — the provider's own listings, any status
+    public function myProperties(Request $request)
+    {
+        $provider = $request->user()->serviceProvider;
+
+        $query = $provider->properties()->with(['city', 'district', 'category', 'type', 'images', 'features'])
+            ->when($request->status, fn ($q, $v) => $q->where('status', $v))
+            ->latest();
+
+        return PropertyResource::collection($query->paginate($request->get('per_page', 15)));
+    }
+
     // POST /api/provider/properties — provider creates a draft listing
     public function store(StorePropertyRequest $request)
     {
@@ -59,34 +73,74 @@ class PropertyController extends Controller
         abort_unless($provider->activeSubscription, 403, 'An active subscription is required to create listings.');
 
         $property = $provider->properties()->create([
-            ...$data,
-            'slug' => Str::slug($data['title']) . '-' . Str::random(6),
+            ...collect($data)->except(['photos'])->all(),
+            'slug' => Str::slug($data['title'], '-', 'en') ?: 'property',
             'status' => 'draft',
         ]);
+        $property->update(['slug' => trim($property->slug.'-'.Str::lower(Str::random(6)), '-')]);
 
         if (! empty($data['features'])) {
             $property->features()->sync($data['features']);
         }
 
-        return new PropertyResource($property->load(['city', 'district', 'category', 'type', 'features']));
+        $this->storeUploadedPhotos($property, $request->file('photos', []));
+
+        return new PropertyResource($property->load(['city', 'district', 'category', 'type', 'features', 'images']));
     }
 
     public function update(UpdatePropertyRequest $request, Property $property)
     {
         $data = $request->validated();
-        $property->update($data);
+        $property->update(collect($data)->except(['features', 'photos', 'delete_images', 'featured_image_id'])->all());
 
         if (array_key_exists('features', $data)) {
             $property->features()->sync($data['features']);
         }
 
-        return new PropertyResource($property->fresh(['city', 'district', 'category', 'type', 'features']));
+        if (! empty($data['delete_images'])) {
+            $property->images()->whereIn('id', $data['delete_images'])->get()->each(function ($image) {
+                Storage::disk('public')->delete($image->path);
+                $image->delete();
+            });
+        }
+
+        $this->storeUploadedPhotos($property, $request->file('photos', []));
+
+        if (! empty($data['featured_image_id'])) {
+            $property->images()->update(['is_featured' => false]);
+            $property->images()->where('id', $data['featured_image_id'])->update(['is_featured' => true]);
+        }
+
+        return new PropertyResource($property->fresh(['city', 'district', 'category', 'type', 'features', 'images']));
+    }
+
+    // Shared by store() and update() — same logic as the web dashboard's provider controller.
+    protected function storeUploadedPhotos(Property $property, array $files): void
+    {
+        if (empty($files)) {
+            return;
+        }
+
+        $nextOrder = (int) $property->images()->max('sort_order');
+        $hasFeatured = $property->images()->where('is_featured', true)->exists();
+
+        foreach ($files as $i => $file) {
+            $path = $file->store("properties/{$property->id}", 'public');
+
+            $property->images()->create([
+                'path' => $path,
+                'type' => 'image',
+                'sort_order' => ++$nextOrder,
+                'is_featured' => ! $hasFeatured && $i === 0,
+            ]);
+        }
     }
 
     public function destroy(Property $property, Request $request)
     {
         abort_unless($property->service_provider_id === $request->user()->serviceProvider?->id, 403);
         $property->delete();
+
         return response()->json(['message' => 'Property deleted']);
     }
 
@@ -95,6 +149,7 @@ class PropertyController extends Controller
     {
         abort_unless($property->service_provider_id === $request->user()->serviceProvider?->id, 403);
         $property->submitForReview();
+
         return new PropertyResource($property);
     }
 
@@ -103,6 +158,7 @@ class PropertyController extends Controller
     {
         abort_unless($property->service_provider_id === $request->user()->serviceProvider?->id, 403);
         $property->update(['status' => 'draft']);
+
         return new PropertyResource($property);
     }
 
@@ -114,7 +170,7 @@ class PropertyController extends Controller
 
         $property->update(['status' => $request->deal_type]);
 
-        \App\Models\Commission::generateFor($property);
+        Commission::generateFor($property);
 
         return new PropertyResource($property);
     }

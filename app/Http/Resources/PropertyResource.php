@@ -22,6 +22,9 @@ class PropertyResource extends JsonResource
             'status' => $this->status,
             'is_featured' => $this->is_featured,
             'views_count' => $this->views_count,
+            'is_favorited' => $request->user()
+                ? $request->user()->favorites()->where('property_id', $this->id)->exists()
+                : false,
             'location' => [
                 'city' => $this->whenLoaded('city', fn () => $this->city->name),
                 'district' => $this->whenLoaded('district', fn () => $this->district?->name),

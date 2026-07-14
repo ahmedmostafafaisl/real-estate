@@ -30,6 +30,8 @@ class StorePropertyRequest extends FormRequest
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'features' => ['nullable', 'array'],
             'features.*' => ['exists:property_features,id'],
+            'photos' => ['nullable', 'array', 'max:10'],
+            'photos.*' => ['image', 'max:5120'],
         ];
     }
 }

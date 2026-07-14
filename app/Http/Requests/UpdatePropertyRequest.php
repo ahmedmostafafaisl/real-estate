@@ -24,6 +24,11 @@ class UpdatePropertyRequest extends FormRequest
             'district_id' => ['sometimes', 'nullable', 'exists:districts,id'],
             'features' => ['sometimes', 'array'],
             'features.*' => ['exists:property_features,id'],
+            'photos' => ['sometimes', 'array', 'max:10'],
+            'photos.*' => ['image', 'max:5120'],
+            'delete_images' => ['sometimes', 'array'],
+            'delete_images.*' => ['integer', 'exists:property_images,id'],
+            'featured_image_id' => ['sometimes', 'integer', 'exists:property_images,id'],
         ];
     }
 }

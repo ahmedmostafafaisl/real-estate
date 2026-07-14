@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\ServiceProviderVerificationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CmsPageController;
 use App\Http\Controllers\Api\CommissionController;
+use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\GeoController;
 use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\Api\InvoiceController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Api\NotificationTemplateController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PropertyCategoryController;
 use App\Http\Controllers\Api\PropertyController;
+use App\Http\Controllers\Api\PropertyFeatureController;
 use App\Http\Controllers\Api\PropertyReportController;
 use App\Http\Controllers\Api\PropertyTypeController;
 use App\Http\Controllers\Api\ReviewController;
@@ -37,6 +39,7 @@ Route::get('/properties', [PropertyController::class, 'index']);
 Route::get('/properties/{property}', [PropertyController::class, 'show']);
 Route::get('/property-categories', [PropertyCategoryController::class, 'index']);
 Route::get('/property-types', [PropertyTypeController::class, 'index']);
+Route::get('/property-features', [PropertyFeatureController::class, 'index']);
 Route::get('/geo/countries', [GeoController::class, 'countries']);
 Route::get('/geo/cities', [GeoController::class, 'cities']);
 Route::get('/geo/cities/{city}/districts', [GeoController::class, 'districts']);
@@ -61,6 +64,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/properties/{property}/reviews', [ReviewController::class, 'store']);
     Route::post('/properties/{property}/reports', [PropertyReportController::class, 'store']);
     Route::get('/my/viewing-requests', [ViewingRequestController::class, 'index']);
+    Route::get('/favorites', [FavoriteController::class, 'index']);
+    Route::post('/properties/{property}/favorite', [FavoriteController::class, 'toggle']);
 
     /*
     |----------------------------------------------------------------
@@ -71,6 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/dashboard', [ServiceProviderController::class, 'dashboard']);
         Route::patch('/profile', [ServiceProviderController::class, 'updateProfile']);
 
+        Route::get('/properties', [PropertyController::class, 'myProperties']);
         Route::post('/properties', [PropertyController::class, 'store']);
         Route::patch('/properties/{property}', [PropertyController::class, 'update']);
         Route::delete('/properties/{property}', [PropertyController::class, 'destroy']);
