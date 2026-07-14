@@ -26,8 +26,11 @@ class CmsController extends Controller
             'status' => ['required', 'in:draft,published'],
         ]);
 
-        CmsPage::create([...$data, 'slug' => Str::slug($data['title'])]);
-        return back()->with('status', 'Page created.');
+        // Str::slug() can't transliterate Arabic titles — fall back to a random slug.
+        $slug = Str::slug($data['title'], '-', 'en') ?: Str::lower(Str::random(8));
+        CmsPage::create([...$data, 'slug' => $slug]);
+
+        return back()->with('status', __('admin.flash_page_created'));
     }
 
     public function updatePage(CmsPage $page, Request $request)
@@ -39,7 +42,8 @@ class CmsController extends Controller
         ]);
 
         $page->update($data);
-        return back()->with('status', 'Page updated.');
+
+        return back()->with('status', __('admin.flash_page_updated'));
     }
 
     public function storeFaq(Request $request)
@@ -50,6 +54,7 @@ class CmsController extends Controller
         ]);
 
         Faq::create($data);
-        return back()->with('status', 'FAQ added.');
+
+        return back()->with('status', __('admin.flash_faq_added'));
     }
 }

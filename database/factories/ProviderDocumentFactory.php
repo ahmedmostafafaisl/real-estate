@@ -12,6 +12,7 @@ class ProviderDocumentFactory extends Factory
 
     public function definition(): array
     {
+        // Document type/status are internal identifiers, not translated display text.
         $type = fake()->randomElement(['commercial_register', 'license', 'id_proof', 'tax_certificate']);
 
         return [

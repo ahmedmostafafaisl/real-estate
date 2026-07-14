@@ -13,19 +13,19 @@ class UserAndProviderSeeder extends Seeder
     public function run(): void
     {
         // Admins
-        User::factory()->admin()->create(['name' => 'Platform Admin', 'email' => 'admin@keystone.io'])
+        User::factory()->admin()->create(['name' => 'مدير المنصة', 'email' => 'admin@keystone.io'])
             ->assignRole('admin');
         User::factory()->admin()->count(2)->create()->each(fn ($u) => $u->assignRole('admin'));
 
         // Customers
-        User::factory()->customer()->count(200)->create()->each(fn ($u) => $u->assignRole('customer'));
+        User::factory()->customer()->count(600)->create()->each(fn ($u) => $u->assignRole('customer'));
 
         // Service providers (user + profile + documents + employees), weighted toward verified
         ServiceProvider::factory()
-            ->count(50)
+            ->count(100)
             ->sequence(
-                fn ($seq) => $seq->index < 35 ? ['verification_status' => 'verified', 'verified_at' => now()->subDays(random_int(5, 300))]
-                    : ($seq->index < 45 ? ['verification_status' => 'pending', 'verified_at' => null]
+                fn ($seq) => $seq->index < 70 ? ['verification_status' => 'verified', 'verified_at' => now()->subDays(random_int(5, 300))]
+                    : ($seq->index < 90 ? ['verification_status' => 'pending', 'verified_at' => null]
                         : ['verification_status' => 'rejected', 'verified_at' => null])
             )
             ->create()

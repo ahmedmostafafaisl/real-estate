@@ -12,10 +12,10 @@ class ReviewFactory extends Factory
     protected $model = Review::class;
 
     protected static array $comments = [
-        'Great location, responsive agent throughout.', 'Photos didn\'t quite match the actual unit.',
-        'Smooth viewing process, would recommend this provider.', 'Price changed after the visit — a bit disappointing.',
-        'Exactly as described, very happy with the purchase.', 'Agent was slow to respond to follow-up questions.',
-        'Excellent condition, move-in ready.', 'Good value for the area.',
+        'موقع ممتاز والمكتب تجاوب سريعاً معنا.', 'الصور لم تطابق تماماً الوحدة الفعلية.',
+        'تجربة معاينة سلسة، أنصح بالتعامل مع هذا المزوّد.', 'تغيّر السعر بعد الزيارة، الأمر كان مخيباً بعض الشيء.',
+        'العقار مطابق تماماً للوصف، سعيد جداً بالصفقة.', 'المكتب كان بطيئاً في الرد على أسئلة المتابعة.',
+        'حالة ممتازة وجاهز للسكن مباشرة.', 'قيمة جيدة مقارنة بأسعار المنطقة.',
     ];
 
     public function definition(): array

@@ -25,11 +25,11 @@ class EngagementSeeder extends Seeder
         $pick = fn () => $properties->random();
         $pickUser = fn () => $customers->random();
 
-        collect(range(1, 400))->each(function () use ($pick, $pickUser) {
+        collect(range(1, 1200))->each(function () use ($pick, $pickUser) {
             Inquiry::factory()->for($pick(), 'property')->for($pickUser(), 'user')->create();
         });
 
-        collect(range(1, 250))->each(function () use ($pick, $pickUser) {
+        collect(range(1, 800))->each(function () use ($pick, $pickUser) {
             $property = $pick();
             ViewingRequest::factory()
                 ->for($property, 'property')
@@ -37,11 +37,11 @@ class EngagementSeeder extends Seeder
                 ->create(['service_provider_id' => $property->service_provider_id]);
         });
 
-        collect(range(1, 300))->each(function () use ($pick, $pickUser) {
+        collect(range(1, 900))->each(function () use ($pick, $pickUser) {
             Review::factory()->for($pick(), 'property')->for($pickUser(), 'user')->create();
         });
 
-        collect(range(1, 50))->each(function () use ($pick, $pickUser) {
+        collect(range(1, 150))->each(function () use ($pick, $pickUser) {
             PropertyReport::factory()->for($pick(), 'property')->for($pickUser(), 'user')->create();
         });
     }

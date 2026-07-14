@@ -6,34 +6,50 @@ use App\Models\PropertyCategory;
 use App\Models\PropertyFeature;
 use App\Models\PropertyType;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class PropertyTaxonomySeeder extends Seeder
 {
     public function run(): void
     {
+        // Slugs are kept as stable Latin identifiers — Str::slug() can't transliterate
+        // Arabic, and nothing in the app routes by these slugs, so they just need to
+        // stay unique and stable while the display name is Arabic.
         $taxonomy = [
-            'Residential' => ['Apartment', 'Villa', 'Townhouse'],
-            'Commercial' => ['Office', 'Retail'],
-            'Land' => ['Land Plot'],
-            'Industrial' => ['Warehouse'],
+            ['name' => 'سكني', 'slug' => 'residential', 'types' => [
+                ['name' => 'شقة', 'slug' => 'apartment'],
+                ['name' => 'فيلا', 'slug' => 'villa'],
+                ['name' => 'تاون هاوس', 'slug' => 'townhouse'],
+            ]],
+            ['name' => 'تجاري', 'slug' => 'commercial', 'types' => [
+                ['name' => 'مكتب', 'slug' => 'office'],
+                ['name' => 'محل تجاري', 'slug' => 'retail'],
+            ]],
+            ['name' => 'أراضٍ', 'slug' => 'land', 'types' => [
+                ['name' => 'أرض', 'slug' => 'land-plot'],
+            ]],
+            ['name' => 'صناعي', 'slug' => 'industrial', 'types' => [
+                ['name' => 'مستودع', 'slug' => 'warehouse'],
+            ]],
         ];
 
-        foreach ($taxonomy as $categoryName => $types) {
-            $category = PropertyCategory::firstOrCreate(
-                ['slug' => Str::slug($categoryName)],
-                ['name' => $categoryName]
-            );
+        foreach ($taxonomy as $cat) {
+            $category = PropertyCategory::firstOrCreate(['slug' => $cat['slug']], ['name' => $cat['name']]);
 
-            foreach ($types as $typeName) {
+            foreach ($cat['types'] as $type) {
                 PropertyType::firstOrCreate(
-                    ['slug' => Str::slug($typeName)],
-                    ['property_category_id' => $category->id, 'name' => $typeName]
+                    ['slug' => $type['slug']],
+                    ['property_category_id' => $category->id, 'name' => $type['name']]
                 );
             }
         }
 
-        foreach (['Parking', 'Swimming Pool', 'Elevator', 'Central AC', 'Balcony', 'Maid Room', 'Security', 'Garden'] as $feature) {
+        $features = [
+            'موقف سيارات', 'مسبح', 'مصعد', 'تكييف مركزي', 'شرفة',
+            'غرفة خادمة', 'حراسة أمنية', 'حديقة', 'نظام لاسلكي ذكي', 'مطبخ مجهز',
+            'غرفة غسيل', 'مصعد خدمة', 'نظام إنذار', 'كاميرات مراقبة', 'عزل حراري',
+        ];
+
+        foreach ($features as $feature) {
             PropertyFeature::firstOrCreate(['name' => $feature]);
         }
     }

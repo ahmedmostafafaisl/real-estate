@@ -10,20 +10,22 @@ class CmsContentSeeder extends Seeder
 {
     public function run(): void
     {
+        // slug stays a stable Latin route key; title/content are Arabic.
         $pages = [
-            ['slug' => 'about-us', 'title' => 'About Us', 'content' =>
-                "Keystone connects property seekers with verified agencies, brokers, owners, and developers across the region. ".
-                "We built the platform to make listing, discovering, and closing on a property straightforward for everyone involved — ".
-                "clear approval workflows for providers, transparent search for customers, and real oversight for administrators."],
-            ['slug' => 'contact-us', 'title' => 'Contact Us', 'content' =>
-                "We're happy to help with questions about listings, subscriptions, or your account. ".
-                "Reach us using the form on this page or email support@keystone.io — we typically respond within one business day."],
-            ['slug' => 'privacy-policy', 'title' => 'Privacy Policy', 'content' =>
-                "This Privacy Policy describes how Keystone collects, uses, and protects your information when you use our platform. ".
-                "Replace this placeholder with your organization's reviewed privacy policy before going live."],
-            ['slug' => 'terms-conditions', 'title' => 'Terms & Conditions', 'content' =>
-                "These Terms & Conditions govern your use of the Keystone platform, including listing, browsing, and subscription features. ".
-                "Replace this placeholder with your organization's reviewed terms before going live."],
+            ['slug' => 'about-us', 'title' => 'من نحن', 'content' =>
+                'تربط Keystone الباحثين عن عقار بمكاتب ووسطاء وملاك ومطوّرين موثوقين في مختلف مناطق المملكة. '.
+                'صممنا المنصة لتجعل عرض العقارات واكتشافها وإتمام صفقاتها أمراً واضحاً وسهلاً لجميع الأطراف — '.
+                'مسارات موافقة شفافة لمزوّدي الخدمة، بحث واضح للعملاء، ورقابة حقيقية لفريق الإدارة.'],
+            ['slug' => 'contact-us', 'title' => 'اتصل بنا', 'content' =>
+                'يسعدنا مساعدتك في أي استفسار يخص العقارات أو الاشتراكات أو حسابك. '.
+                'يمكنك التواصل معنا عبر النموذج في هذه الصفحة أو عبر البريد الإلكتروني support@keystone.io — '.
+                'ونحرص على الرد خلال يوم عمل واحد.'],
+            ['slug' => 'privacy-policy', 'title' => 'سياسة الخصوصية', 'content' =>
+                'توضح سياسة الخصوصية هذه كيفية جمع Keystone لمعلوماتك واستخدامها وحمايتها أثناء استخدامك للمنصة. '.
+                'يُرجى استبدال هذا النص التجريبي بسياسة الخصوصية الفعلية المعتمدة من جهتك قبل الإطلاق الرسمي.'],
+            ['slug' => 'terms-conditions', 'title' => 'الشروط والأحكام', 'content' =>
+                'تحكم هذه الشروط والأحكام استخدامك لمنصة Keystone، بما يشمل عرض العقارات وتصفحها والاشتراك في الباقات. '.
+                'يُرجى استبدال هذا النص التجريبي بالشروط والأحكام الفعلية المعتمدة من جهتك قبل الإطلاق الرسمي.'],
         ];
 
         foreach ($pages as $p) {
@@ -31,17 +33,34 @@ class CmsContentSeeder extends Seeder
         }
 
         $faqs = [
-            ['question' => 'How do I list a property?', 'answer' => 'Register as a service provider, get verified, then create a listing from your dashboard — it goes live once an admin approves it.', 'sort_order' => 1],
-            ['question' => 'How much does a subscription cost?', 'answer' => 'Plans start at SAR 149/month. See the Subscription Packages page for the full comparison.', 'sort_order' => 2],
-            ['question' => 'How do I schedule a viewing?', 'answer' => 'Open any published listing and use the "Request a viewing" button — the provider will confirm a time with you.', 'sort_order' => 3],
-            ['question' => 'Is my payment information secure?', 'answer' => 'Yes — all payments are processed through PCI-compliant gateways; we never store your card details directly.', 'sort_order' => 4],
+            ['question' => 'كيف يمكنني إضافة عقار للبيع أو الإيجار؟', 'answer' => 'سجّل كمزوّد خدمة، وبعد توثيق حسابك يمكنك إنشاء عقار من لوحة التحكم — ينشر تلقائياً بعد موافقة الإدارة.', 'sort_order' => 1],
+            ['question' => 'كم تكلفة الاشتراك؟', 'answer' => 'تبدأ الباقات من 149 ريال شهرياً. راجع صفحة الأسعار للمقارنة الكاملة بين الباقات.', 'sort_order' => 2],
+            ['question' => 'كيف أطلب معاينة لعقار؟', 'answer' => 'افتح صفحة أي عقار منشور واضغط على زر "طلب معاينة" — سيقوم المزوّد بتأكيد الموعد معك.', 'sort_order' => 3],
+            ['question' => 'هل معلومات الدفع الخاصة بي آمنة؟', 'answer' => 'نعم — تتم جميع عمليات الدفع عبر بوابات متوافقة مع معايير PCI، ولا نقوم بتخزين بيانات بطاقتك مباشرة.', 'sort_order' => 4],
         ];
 
         foreach ($faqs as $f) {
             Faq::firstOrCreate(['question' => $f['question']], $f);
         }
 
-        // Round out the FAQ list with additional generated entries for a fuller page.
-        Faq::factory()->count(10)->create();
+        // Round out the FAQ list with additional Arabic Q&A pairs for a fuller page.
+        $extra = [
+            ['question' => 'هل يمكنني تعديل بيانات العقار بعد نشره؟', 'answer' => 'نعم، يمكنك تعديل السعر والوصف والمواصفات في أي وقت من لوحة التحكم دون الحاجة لموافقة جديدة على البيانات الأساسية.'],
+            ['question' => 'كيف يتم احتساب العمولة؟', 'answer' => 'تُحتسب العمولة كنسبة من قيمة الصفقة المتفق عليها بين المزوّد والمنصة، وتظهر تفاصيلها في صفحة العمولات بلوحة التحكم.'],
+            ['question' => 'ماذا لو رُفض عقاري من قبل الإدارة؟', 'answer' => 'ستصلك رسالة توضح سبب الرفض، ويمكنك تعديل العقار وإعادة إرساله للمراجعة في أي وقت.'],
+            ['question' => 'هل يمكنني إلغاء اشتراكي في أي وقت؟', 'answer' => 'نعم، يمكنك إيقاف التجديد التلقائي من صفحة الاشتراك، وسيبقى اشتراكك فعالاً حتى نهاية الفترة المدفوعة.'],
+            ['question' => 'كيف أتواصل مع مزوّد خدمة بخصوص عقار؟', 'answer' => 'استخدم زر "إرسال استفسار" أو "طلب معاينة" في صفحة العقار — تحتاج إلى حساب عميل مسجّل لإرسال الرسائل.'],
+            ['question' => 'هل تتوفر تطبيقات جوال؟', 'answer' => 'نعمل حالياً على تطبيق للجوال يغطي أبرز ميزات المنصة، وسيُعلن عن موعد إطلاقه قريباً.'],
+            ['question' => 'كيف يتم التحقق من مزوّدي الخدمة؟', 'answer' => 'يراجع فريق الإدارة السجل التجاري والمستندات المرفوعة قبل منح حالة "موثّق" لأي مكتب أو وسيط.'],
+            ['question' => 'هل يمكنني حفظ عقارات كمفضّلة؟', 'answer' => 'نعم، بعد تسجيل الدخول يمكنك إضافة أي عقار إلى المفضّلة من صفحة تفاصيله للرجوع إليه لاحقاً.'],
+            ['question' => 'ما الفرق بين أنواع مزوّدي الخدمة؟', 'answer' => 'تشمل المنصة مكاتب عقارية ووسطاء أفراد وملاك عقارات ومطوّرين — لكل نوع صلاحيات وواجهة ملف تعريف مماثلة.'],
+            ['question' => 'كيف أُبلغ عن عقار مخالف؟', 'answer' => 'استخدم خيار "إبلاغ عن هذا العقار" في صفحة تفاصيل العقار، وسيراجع الفريق البلاغ خلال وقت قصير.'],
+        ];
+
+        foreach ($extra as $i => $f) {
+            Faq::firstOrCreate(['question' => $f['question']], [
+                'answer' => $f['answer'], 'sort_order' => 5 + $i, 'is_active' => true,
+            ]);
+        }
     }
 }

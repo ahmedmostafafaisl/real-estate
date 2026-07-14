@@ -11,17 +11,22 @@ class ViewingRequestFactory extends Factory
 {
     protected $model = ViewingRequest::class;
 
+    protected static array $notes = [
+        'الرجاء التنسيق قبل نصف ساعة من الموعد.',
+        'أفضل الزيارة في المساء إن أمكن.',
+        'سآتي برفقة أحد أفراد العائلة.',
+        null, null, null,
+    ];
+
     public function definition(): array
     {
-        $property = Property::factory();
-
         return [
-            'property_id' => $property,
+            'property_id' => Property::factory(),
             'user_id' => User::factory()->customer(),
             'service_provider_id' => \App\Models\ServiceProvider::factory(),
             'requested_slot' => fake()->dateTimeBetween('-2 months', '+3 weeks'),
             'status' => fake()->randomElement(['requested', 'confirmed', 'completed', 'completed', 'cancelled']),
-            'notes' => fake()->boolean(30) ? fake()->sentence() : null,
+            'notes' => fake()->randomElement(self::$notes),
         ];
     }
 }

@@ -20,7 +20,7 @@ class FavoriteSeeder extends Seeder
 
         $rows = [];
         $seenPairs = [];
-        $target = 500;
+        $target = 1500;
 
         while (count($rows) < $target) {
             $userId = $customers->random();

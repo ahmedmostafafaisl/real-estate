@@ -12,22 +12,36 @@ class PropertyFactory extends Factory
 {
     protected $model = \App\Models\Property::class;
 
-    protected static array $adjectives = ['Modern', 'Spacious', 'Cozy', 'Luxury', 'Newly renovated', 'Elegant', 'Charming', 'Contemporary'];
+    protected static array $adjectives = ['عصرية', 'واسعة', 'مريحة', 'فاخرة', 'حديثة التجديد', 'أنيقة', 'جذابة', 'معاصرة'];
+    protected static array $descTemplates = [
+        ':adj تقع في موقع مميز في :city، قريبة من الخدمات الأساسية والمرافق العامة. تتميز بتشطيبات عالية الجودة وتصميم عملي يناسب احتياجات السكن أو العمل.',
+        'وحدة :adj في :city ضمن مجمع هادئ، مع سهولة الوصول إلى الطرق الرئيسية والمدارس والأسواق. مناسبة للعائلات الباحثة عن الراحة والخصوصية.',
+        'فرصة استثمارية في :city — عقار :adj بتشطيب ممتاز وإطلالة جيدة، ضمن منطقة تشهد نمواً عمرانياً متسارعاً.',
+        'عقار :adj حديث البناء في :city، يضم مساحات واسعة وإضاءة طبيعية جيدة، ويقع على شارع رئيسي.',
+    ];
 
     public function definition(): array
     {
         $type = PropertyType::inRandomOrder()->first();
         $city = City::inRandomOrder()->first();
         $district = $city ? $city->districts()->inRandomOrder()->first() : null;
+        $cityName = $city->name ?? 'المدينة';
+        $adjective = fake()->randomElement(self::$adjectives);
 
         $bedrooms = fake()->boolean(80) ? fake()->numberBetween(1, 6) : null;
-        $title = trim(fake()->randomElement(self::$adjectives) . ' ' . ($type->name ?? 'Property') .
-            ($bedrooms ? " {$bedrooms}BR" : '') . ' in ' . ($city->name ?? 'the city'));
+        $title = trim(($type->name ?? 'عقار') . ' ' . $adjective .
+            ($bedrooms ? " - {$bedrooms} غرف" : '') . ' في ' . $cityName);
 
         $status = fake()->randomElement([
             'draft', 'pending', 'published', 'published', 'published', 'published',
             'sold', 'rented', 'expired', 'rejected',
         ]);
+
+        $description = str_replace(
+            [':adj', ':city'],
+            [$adjective, $cityName],
+            fake()->randomElement(self::$descTemplates)
+        );
 
         return [
             'service_provider_id' => ServiceProvider::factory(),
@@ -36,8 +50,8 @@ class PropertyFactory extends Factory
             'city_id' => $city->id ?? 1,
             'district_id' => $district?->id,
             'title' => $title,
-            'slug' => Str::slug($title) . '-' . Str::lower(Str::random(6)),
-            'description' => fake()->paragraphs(3, true),
+            'slug' => Str::slug($title, '-', 'en') ?: 'property-' . Str::lower(Str::random(8)),
+            'description' => $description,
             'listing_type' => fake()->randomElement(['sale', 'rent']),
             'price' => fake()->numberBetween(150, 2500) * 1000,
             'area_sqm' => fake()->numberBetween(60, 650),
@@ -48,8 +62,8 @@ class PropertyFactory extends Factory
             'longitude' => fake()->longitude(34, 50),
             'status' => $status,
             'rejection_reason' => $status === 'rejected' ? fake()->randomElement([
-                'Photos do not match the description.', 'Price appears inconsistent with the market.',
-                'Missing required commercial documentation.',
+                'الصور المرفقة لا تطابق الوصف المكتوب.', 'السعر المدرج غير متوافق مع أسعار السوق الحالية.',
+                'المستندات التجارية المطلوبة غير مكتملة.',
             ]) : null,
             'is_featured' => fake()->boolean(15),
             'published_at' => in_array($status, ['published', 'sold', 'rented', 'expired']) ? fake()->dateTimeBetween('-6 months', 'now') : null,

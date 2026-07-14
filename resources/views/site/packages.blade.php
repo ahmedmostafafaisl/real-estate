@@ -6,8 +6,8 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @foreach ($packages as $p)
-                <div class="bg-white border {{ $p->name === 'Pro' ? 'border-brass' : 'border-line' }} rounded-xl p-7">
-                    @if ($p->name === 'Pro')<div class="text-brass text-xs font-semibold uppercase mb-2">{{ __('site.most_popular') }}</div>@endif
+                <div class="bg-white border {{ $p->slug === 'pro' ? 'border-brass' : 'border-line' }} rounded-xl p-7">
+                    @if ($p->slug === 'pro')<div class="text-brass text-xs font-semibold uppercase mb-2">{{ __('site.most_popular') }}</div>@endif
                     <div class="font-serif text-2xl">{{ $p->name }}</div>
                     <div class="font-mono text-3xl font-semibold my-3">{{ __('common.currency') }} {{ $p->price }}<span class="text-sm font-sans text-textfaint">{{ __('common.per_month') }}</span></div>
                     <ul class="flex flex-col gap-2.5 mb-6 text-sm text-textmute">

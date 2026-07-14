@@ -185,4 +185,10 @@ return [
     'fcm_key' => 'Firebase Cloud Messaging key',
     'payment_gateway_key' => 'Payment gateway key',
     'save_settings' => 'Save settings',
+    'flash_category_added' => 'Category added.',
+    'flash_type_added' => 'Type added.',
+    'flash_feature_added' => 'Feature added.',
+    'flash_page_created' => 'Page created.',
+    'flash_page_updated' => 'Page updated.',
+    'flash_faq_added' => 'FAQ added.',
 ];

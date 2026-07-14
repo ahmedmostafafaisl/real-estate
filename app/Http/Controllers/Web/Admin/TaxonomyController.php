@@ -20,11 +20,19 @@ class TaxonomyController extends Controller
         return view('admin.taxonomy', compact('categories', 'types', 'features'));
     }
 
+    // Str::slug() can't transliterate Arabic input, so it can return an empty string —
+    // fall back to a random slug rather than risk a duplicate-empty-slug collision.
+    protected function slugOrRandom(string $value): string
+    {
+        return Str::slug($value, '-', 'en') ?: Str::lower(Str::random(8));
+    }
+
     public function storeCategory(Request $request)
     {
         $data = $request->validate(['name' => ['required', 'string', 'max:255']]);
-        PropertyCategory::create([...$data, 'slug' => Str::slug($data['name'])]);
-        return back()->with('status', 'Category added.');
+        PropertyCategory::create([...$data, 'slug' => $this->slugOrRandom($data['name'])]);
+
+        return back()->with('status', __('admin.flash_category_added'));
     }
 
     public function storeType(Request $request)
@@ -33,14 +41,16 @@ class TaxonomyController extends Controller
             'property_category_id' => ['required', 'exists:property_categories,id'],
             'name' => ['required', 'string', 'max:255'],
         ]);
-        PropertyType::create([...$data, 'slug' => Str::slug($data['name'])]);
-        return back()->with('status', 'Type added.');
+        PropertyType::create([...$data, 'slug' => $this->slugOrRandom($data['name'])]);
+
+        return back()->with('status', __('admin.flash_type_added'));
     }
 
     public function storeFeature(Request $request)
     {
         $data = $request->validate(['name' => ['required', 'string', 'max:255']]);
         PropertyFeature::create($data);
-        return back()->with('status', 'Feature added.');
+
+        return back()->with('status', __('admin.flash_feature_added'));
     }
 }

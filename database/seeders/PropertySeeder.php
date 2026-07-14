@@ -20,7 +20,7 @@ class PropertySeeder extends Seeder
         }
 
         Property::factory()
-            ->count(600)
+            ->count(2000)
             ->create()
             ->each(function (Property $property) use ($providerIds, $featureIds) {
                 $property->service_provider_id = $providerIds->random();

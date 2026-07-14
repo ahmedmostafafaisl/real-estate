@@ -185,4 +185,10 @@ return [
     'fcm_key' => 'مفتاح Firebase Cloud Messaging',
     'payment_gateway_key' => 'مفتاح بوابة الدفع',
     'save_settings' => 'حفظ الإعدادات',
+    'flash_category_added' => 'تمت إضافة التصنيف.',
+    'flash_type_added' => 'تمت إضافة النوع.',
+    'flash_feature_added' => 'تمت إضافة الميزة.',
+    'flash_page_created' => 'تم إنشاء الصفحة.',
+    'flash_page_updated' => 'تم تحديث الصفحة.',
+    'flash_faq_added' => 'تمت إضافة السؤال الشائع.',
 ];

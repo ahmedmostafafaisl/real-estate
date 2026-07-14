@@ -6,31 +6,41 @@ use App\Models\City;
 use App\Models\ServiceProvider;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ServiceProviderFactory extends Factory
 {
     protected $model = ServiceProvider::class;
 
     protected static array $officeWords = [
-        'Alnakhil', 'Horizon', 'Dar Al Bina', 'Coastal', 'Falcon', 'Zahra', 'Marwan & Sons',
-        'Union', 'Silk Route', 'Al Waha', 'Bright Key', 'Sabeel', 'Al Mashariq', 'Nawras',
-        'Dunes', 'Al Reef', 'Cedar', 'Qasr', 'Al Yamamah', 'Skyline', 'Al Basateen', 'Vantage',
+        'النخيل', 'الأفق', 'دار البناء', 'الساحل', 'الصقر', 'زهرة الشرق', 'الاتحاد', 'طريق الحرير',
+        'الواحة', 'المفتاح المشرق', 'سبيل', 'المشارق', 'نورس', 'الكثبان', 'الريف', 'الأرز',
+        'القصر', 'اليمامة', 'الأفق الذهبي', 'البساتين', 'الرؤية', 'المجد', 'الديار', 'سنابل',
     ];
-    protected static array $officeSuffixes = ['Realty', 'Properties', 'Developments', 'Holdings', 'Group', 'Estates', 'Homes', 'Land Co.'];
+    protected static array $officeSuffixes = [
+        'العقارية', 'للعقارات', 'للتطوير العقاري', 'القابضة', 'للإسكان', 'العقارات المتحدة', 'الاستثمارية',
+    ];
+    protected static array $bioTemplates = [
+        'مكتب عقاري متكامل يقدم خدمات البيع والإيجار السكني والتجاري في :city وما حولها منذ عدة سنوات.',
+        'فريق متخصص في الوساطة العقارية، يركز على تقديم تجربة سلسة وشفافة للعملاء في :city.',
+        'شركة تطوير عقاري تعمل على مشاريع سكنية وتجارية مميزة في :city، بخبرة تمتد لأكثر من عقد.',
+        'وسيط عقاري معتمد يساعد الأفراد والشركات على إيجاد العقار المناسب في :city بأفضل الشروط.',
+    ];
 
     public function definition(): array
     {
+        $city = City::inRandomOrder()->first();
+        $cityName = $city->name ?? 'المدينة';
+
         return [
             'user_id' => User::factory()->serviceProviderUser(),
             'office_name' => fake()->randomElement(self::$officeWords) . ' ' . fake()->randomElement(self::$officeSuffixes),
             'provider_type' => fake()->randomElement(['agency', 'broker', 'owner', 'developer']),
             'commercial_register_no' => fake()->boolean(80) ? fake()->numerify('##########') : null,
             'license_no' => fake()->boolean(70) ? 'LIC-' . fake()->numerify('#####') : null,
-            'city_id' => City::inRandomOrder()->value('id') ?? City::factory(),
-            'address' => fake()->streetAddress(),
+            'city_id' => $city->id ?? City::factory(),
+            'address' => 'شارع ' . fake()->randomElement(['الملك فهد', 'الملك عبدالعزيز', 'الأمير سلطان', 'العروبة', 'التحلية']) . '، ' . $cityName,
             'logo' => null,
-            'bio' => fake()->boolean(75) ? fake()->paragraph(2) : null,
+            'bio' => fake()->boolean(75) ? str_replace(':city', $cityName, fake()->randomElement(self::$bioTemplates)) : null,
             'verification_status' => fake()->randomElement(['pending', 'verified', 'verified', 'verified', 'rejected']),
             'verified_at' => null,
             'commission_rate' => fake()->randomElement([1.5, 2.0, 2.0, 2.5, 3.0]),

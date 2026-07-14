@@ -12,14 +12,14 @@ class InquiryFactory extends Factory
     protected $model = Inquiry::class;
 
     protected static array $messages = [
-        "Is this property still available?",
-        "Can I schedule a viewing this week?",
-        "What's the final price — is it negotiable?",
-        "Does it include parking and storage?",
-        "How far is it from the nearest metro station?",
-        "Is the price inclusive of service charges?",
-        "Can you share more photos of the kitchen?",
-        "Is financing available through your office?",
+        'هل هذا العقار متاح حالياً؟',
+        'هل يمكنني حجز موعد لمعاينته هذا الأسبوع؟',
+        'ما هو السعر النهائي، وهل هو قابل للتفاوض؟',
+        'هل يشمل السعر موقف سيارات ومستودعاً؟',
+        'كم تبعد المسافة عن أقرب محطة مترو؟',
+        'هل السعر شامل رسوم الخدمات؟',
+        'هل يمكن إرسال صور إضافية للمطبخ؟',
+        'هل يتوفر تمويل عبر مكتبكم؟',
     ];
 
     public function definition(): array
