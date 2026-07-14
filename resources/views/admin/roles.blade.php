@@ -19,7 +19,7 @@
             @foreach ($roles as $role)
                 <div x-show="active === '{{ $role->name }}'" x-cloak>
                     <form action="{{ route('admin.roles.permissions', $role) }}" method="POST" class="flex flex-col gap-4">
-                        @csrf
+                        @csrf @method('PUT')
                         @php $rolePerms = $role->permissions->pluck('name')->toArray(); @endphp
                         @php $groups = $permissions->groupBy(fn($p) => explode('.', $p->name)[0]); @endphp
                         @foreach ($groups as $group => $perms)
