@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'firebase' => [
+        // Path to the service-account JSON downloaded from your Firebase project's
+        // Settings > Service Accounts > Generate new private key. Not included here —
+        // this is a secret credential file, not something to commit.
+        'credentials' => env('FIREBASE_CREDENTIALS', storage_path('app/firebase-credentials.json')),
+    ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
 ];

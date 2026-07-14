@@ -17,6 +17,7 @@ class NotificationTemplateSeeder extends Seeder
             ['event_key' => 'subscription.expiring', 'label' => 'اقتراب انتهاء الاشتراك', 'push_enabled' => true, 'email_enabled' => true],
             ['event_key' => 'property.approved', 'label' => 'تمت الموافقة على العقار', 'push_enabled' => true],
             ['event_key' => 'property.rejected', 'label' => 'تم رفض العقار', 'push_enabled' => true, 'email_enabled' => true],
+            ['event_key' => 'property.expired', 'label' => 'انتهت صلاحية العقار', 'push_enabled' => true],
             ['event_key' => 'payment.received', 'label' => 'تم استلام الدفعة', 'email_enabled' => true],
         ];
 

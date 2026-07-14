@@ -11,14 +11,13 @@
                     <td class="py-2.5 px-2"><x-badge :status="ucfirst($inv->status)" /></td>
                     <td class="py-2.5 px-2 text-right">
                         @if ($inv->status === 'unpaid')
-                        <form action="{{ route('provider.invoices.pay', $inv) }}" method="POST" class="inline-flex gap-1.5">
-                            @csrf
-                            <select name="method" class="border border-line rounded-md text-xs px-1.5 py-1">
-                                <option value="visa">Visa</option><option value="mastercard">Mastercard</option>
-                                <option value="mada">Mada</option><option value="apple_pay">Apple Pay</option><option value="bank_transfer">{{ app()->getLocale() === 'ar' ? 'حوالة بنكية' : 'Bank transfer' }}</option>
-                            </select>
-                            <button class="bg-ink text-white rounded-md px-2.5 py-1 text-xs font-semibold">{{ __('provider.pay_now') }}</button>
-                        </form>
+                        <div class="flex items-center gap-1.5 justify-end">
+                            <a href="{{ route('provider.invoices.checkout', $inv) }}" class="bg-ink text-white rounded-md px-2.5 py-1.5 text-xs font-semibold">{{ __('provider.pay_now') }}</a>
+                            <form action="{{ route('provider.invoices.pay', $inv) }}" method="POST" onsubmit="return confirm('{{ __('provider.confirm_bank_transfer') }}')">
+                                @csrf
+                                <button class="border border-line rounded-md px-2.5 py-1.5 text-xs font-semibold text-textmute">{{ __('provider.paid_by_bank_transfer') }}</button>
+                            </form>
+                        </div>
                         @endif
                     </td>
                 </tr>

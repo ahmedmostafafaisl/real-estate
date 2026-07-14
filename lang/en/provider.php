@@ -44,6 +44,10 @@ return [
     'area_sqm' => 'Area (sqm)',
     'bedrooms' => 'Bedrooms',
     'bathrooms' => 'Bathrooms',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+    'location_hint' => "Find your property's coordinates on",
+    'open_maps_link' => 'Google Maps',
     'save_as_draft' => 'Save as draft',
     'save_and_submit' => 'Save and submit for review',
     'photos' => 'Photos',
@@ -98,6 +102,8 @@ return [
     'amount' => 'Amount',
     'due' => 'Due',
     'pay_now' => 'Pay now',
+    'paid_by_bank_transfer' => 'Mark paid by bank transfer',
+    'confirm_bank_transfer' => 'Confirm you have received this payment by bank transfer outside the platform?',
     'no_invoices_yet' => 'No invoices yet.',
 
     // Commissions
@@ -141,6 +147,7 @@ return [
     'inquiry_conversion' => 'Inquiry conversion',
     'inquiries_per_100_views' => 'Inquiries per 100 views',
     'flash_payment_received' => 'Payment received — invoice marked as paid.',
+    'flash_checkout_pending' => "Payment submitted — we'll mark the invoice paid as soon as it's confirmed (usually within a few seconds).",
     'flash_employee_added' => 'Employee added.',
     'flash_employee_removed' => 'Employee removed.',
     'flash_inquiry_responded' => 'Marked as responded.',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\ServiceProviderVerificationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CmsPageController;
 use App\Http\Controllers\Api\CommissionController;
+use App\Http\Controllers\Api\DeviceTokenController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\GeoController;
 use App\Http\Controllers\Api\InquiryController;
@@ -66,6 +67,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my/viewing-requests', [ViewingRequestController::class, 'index']);
     Route::get('/favorites', [FavoriteController::class, 'index']);
     Route::post('/properties/{property}/favorite', [FavoriteController::class, 'toggle']);
+    Route::post('/device-tokens', [DeviceTokenController::class, 'store']);
+    Route::delete('/device-tokens', [DeviceTokenController::class, 'destroy']);
 
     /*
     |----------------------------------------------------------------

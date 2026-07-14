@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Provider;
@@ -20,6 +21,10 @@ Route::get('/lang/{locale}', function (string $locale) {
 
     return back();
 })->name('lang.switch');
+
+// Stripe calls this directly (not a browser), so no CSRF token exists to check —
+// excluded from CSRF verification in bootstrap/app.php.
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 Route::get('/properties', [Site\PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property:slug}', [Site\PropertyController::class, 'show'])->name('properties.show');
@@ -87,6 +92,8 @@ Route::prefix('provider')->name('provider.')->middleware(['auth', 'role:service_
 
     Route::get('/invoices', [Provider\InvoiceController::class, 'index'])->name('invoices.index');
     Route::post('/invoices/{invoice}/pay', [Provider\InvoiceController::class, 'pay'])->name('invoices.pay');
+    Route::get('/invoices/{invoice}/checkout', [Provider\InvoiceController::class, 'checkout'])->name('invoices.checkout');
+    Route::get('/invoices/{invoice}/checkout/success', [Provider\InvoiceController::class, 'checkoutSuccess'])->name('invoices.checkout.success');
 
     Route::get('/commissions', [Provider\CommissionController::class, 'index'])->name('commissions');
     Route::get('/statistics', [Provider\StatisticsController::class, 'index'])->name('statistics');

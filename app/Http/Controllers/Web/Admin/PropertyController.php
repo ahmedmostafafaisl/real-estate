@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNotificationJob;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class PropertyController extends Controller
     public function approve(Property $property)
     {
         $property->approve();
+        $this->notifyOwner($property, 'property.approved', 'Listing approved', "\"{$property->title}\" is now live.");
 
         return back()->with('status', __('admin.flash_property_approved'));
     }
@@ -45,8 +47,17 @@ class PropertyController extends Controller
     {
         $data = $request->validate(['reason' => ['required', 'string', 'max:500']]);
         $property->reject($data['reason']);
+        $this->notifyOwner($property, 'property.rejected', 'Listing rejected', $data['reason']);
 
         return back()->with('status', __('admin.flash_property_rejected'));
+    }
+
+    protected function notifyOwner(Property $property, string $eventKey, string $title, string $body): void
+    {
+        $user = $property->serviceProvider->user ?? null;
+        if ($user) {
+            SendNotificationJob::dispatch($user->id, $eventKey, $title, $body, ['property_id' => $property->id]);
+        }
     }
 
     // Admin can moderate (delete) photos on any listing but cannot upload —

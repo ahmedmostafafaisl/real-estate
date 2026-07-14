@@ -43,6 +43,12 @@
                 <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.bathrooms') }}</span><input type="number" name="bathrooms" value="{{ old('bathrooms', $property->bathrooms) }}" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
             </div>
 
+            <div class="grid grid-cols-2 gap-3.5">
+                <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.latitude') }}</span><input type="number" step="any" name="latitude" value="{{ old('latitude', $property->latitude) }}" placeholder="24.7136" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
+                <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('provider.longitude') }}</span><input type="number" step="any" name="longitude" value="{{ old('longitude', $property->longitude) }}" placeholder="46.6753" class="border border-line rounded-md px-2.5 py-2 text-sm"></label>
+            </div>
+            <p class="text-[11px] text-textfaint -mt-2">{{ __('provider.location_hint') }} <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="text-brass font-semibold">{{ __('provider.open_maps_link') }}</a></p>
+
             <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('common.description') }}</span>
                 <textarea name="description" rows="4" class="border border-line rounded-md px-2.5 py-2 text-sm">{{ old('description', $property->description) }}</textarea></label>
 

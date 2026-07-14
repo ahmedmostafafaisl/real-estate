@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Site;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNotificationJob;
 use App\Models\City;
 use App\Models\Property;
 use App\Models\PropertyType;
@@ -52,7 +53,16 @@ class PropertyController extends Controller
 
         $property->inquiries()->create(['user_id' => $request->user()->id, 'message' => $data['message']]);
 
-        return back()->with('status', 'Your message has been sent to the provider.');
+        $owner = $property->serviceProvider->user ?? null;
+        if ($owner) {
+            SendNotificationJob::dispatch(
+                $owner->id, 'inquiry.received', 'New inquiry',
+                "New inquiry on \"{$property->title}\": {$data['message']}",
+                ['property_id' => $property->id],
+            );
+        }
+
+        return back()->with('status', __('site.inquiry_sent'));
     }
 
     public function storeViewingRequest(Property $property, Request $request)
@@ -66,6 +76,6 @@ class PropertyController extends Controller
             'requested_slot' => $data['requested_slot'],
         ]);
 
-        return back()->with('status', 'Viewing requested — the provider will confirm a time with you.');
+        return back()->with('status', __('site.viewing_requested'));
     }
 }

@@ -45,6 +45,8 @@ return [
     'send_inquiry' => 'إرسال استفسار',
     'login_to_contact' => 'سجّل الدخول للتواصل مع المزوّد',
     'similar_nearby' => 'عقارات مشابهة قريبة',
+    'location' => 'الموقع',
+    'open_in_maps' => 'فتح في خرائط Google',
     'listing_created' => 'تم إنشاء العقار.',
     'inquiry_sent' => 'تم إرسال رسالتك إلى المزوّد.',
     'viewing_requested' => 'تم إرسال طلب المعاينة — سيؤكد المزوّد الموعد معك.',

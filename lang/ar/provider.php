@@ -44,6 +44,10 @@ return [
     'area_sqm' => 'المساحة (م²)',
     'bedrooms' => 'غرف النوم',
     'bathrooms' => 'الحمامات',
+    'latitude' => 'خط العرض',
+    'longitude' => 'خط الطول',
+    'location_hint' => 'يمكنك إيجاد إحداثيات عقارك عبر',
+    'open_maps_link' => 'خرائط Google',
     'save_as_draft' => 'حفظ كمسودة',
     'save_and_submit' => 'حفظ وإرسال للمراجعة',
     'photos' => 'الصور',
@@ -98,6 +102,8 @@ return [
     'amount' => 'المبلغ',
     'due' => 'تاريخ الاستحقاق',
     'pay_now' => 'الدفع الآن',
+    'paid_by_bank_transfer' => 'تحديد كمدفوع عبر حوالة بنكية',
+    'confirm_bank_transfer' => 'هل تؤكد استلام هذه الدفعة عبر حوالة بنكية خارج المنصة؟',
     'no_invoices_yet' => 'لا توجد فواتير بعد.',
 
     // Commissions
@@ -141,6 +147,7 @@ return [
     'inquiry_conversion' => 'معدل تحويل الاستفسارات',
     'inquiries_per_100_views' => 'استفسار لكل 100 مشاهدة',
     'flash_payment_received' => 'تم استلام الدفعة — تم تحديد الفاتورة كمدفوعة.',
+    'flash_checkout_pending' => 'تم إرسال الدفعة — سيتم تحديد الفاتورة كمدفوعة فور تأكيدها (عادة خلال ثوانٍ قليلة).',
     'flash_employee_added' => 'تمت إضافة الموظف.',
     'flash_employee_removed' => 'تمت إزالة الموظف.',
     'flash_inquiry_responded' => 'تم تحديده كمردود عليه.',

@@ -45,6 +45,8 @@ return [
     'send_inquiry' => 'Send inquiry',
     'login_to_contact' => 'Log in to contact provider',
     'similar_nearby' => 'Similar properties nearby',
+    'location' => 'Location',
+    'open_in_maps' => 'Open in Google Maps',
     'listing_created' => 'Listing created.',
     'inquiry_sent' => 'Your message has been sent to the provider.',
     'viewing_requested' => 'Viewing requested — the provider will confirm a time with you.',

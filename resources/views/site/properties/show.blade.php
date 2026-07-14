@@ -45,6 +45,18 @@
                     @foreach ($property->features as $f)<span class="text-xs border border-line rounded-full px-3 py-1.5">{{ $f->name }}</span>@endforeach
                 </div>
                 @endif
+
+                @if ($property->latitude && $property->longitude)
+                <h2 class="font-serif text-xl mb-3">{{ __('site.location') }}</h2>
+                <div class="rounded-xl overflow-hidden border border-line mb-2" style="height: 280px">
+                    <iframe
+                        src="https://maps.google.com/maps?q={{ $property->latitude }},{{ $property->longitude }}&z=15&output=embed"
+                        width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ $property->latitude }},{{ $property->longitude }}"
+                   target="_blank" rel="noopener" class="text-xs font-semibold text-brass">{{ __('site.open_in_maps') }} →</a>
+                @endif
             </div>
 
             <div>
