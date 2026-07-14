@@ -209,4 +209,7 @@ return [
     'flash_photo_removed' => 'Photo removed.',
     'photos_for' => 'Photos — :title',
     'back_to_properties' => 'Back to properties',
+    'view_details' => 'View',
+    'inquiries_count' => 'Inquiries',
+    'viewing_requests_count' => 'Viewing requests',
 ];

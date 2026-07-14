@@ -18,6 +18,7 @@
                     <td class="py-2.5 px-2"><x-badge :status="ucfirst($p->status)" /></td>
                     <td class="py-2.5 px-2">
                         <div class="flex items-center gap-1.5 flex-wrap">
+                            <x-action-pill :href="route('admin.properties.show', $p)">{{ __('admin.view_details') }}</x-action-pill>
                             <x-action-pill :href="route('admin.properties.photos', $p)">{{ __('admin.manage_photos') }}</x-action-pill>
                             @if ($p->status === 'pending')
                             <form action="{{ route('admin.properties.approve', $p) }}" method="POST">@csrf<x-action-pill tone="success">{{ __('admin.approve') }}</x-action-pill></form>

@@ -54,6 +54,13 @@ return [
     'make_featured' => 'اجعلها رئيسية',
     'remove_photo' => 'إزالة',
     'no_photos_yet' => 'لم يتم رفع أي صور بعد.',
+    'back_to_listings' => 'العودة إلى العقارات',
+    'listing_details' => 'تفاصيل العقار',
+    'mark_sold' => 'تحديد كمباع',
+    'mark_rented' => 'تحديد كمؤجر',
+    'close_deal_title' => 'إغلاق هذه الصفقة',
+    'select_deal_type' => 'اختر نوع الصفقة',
+    'reviews_count' => 'التقييمات',
 
     // Inquiries
     'customer_requests' => 'طلبات العملاء',

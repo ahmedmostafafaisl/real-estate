@@ -54,6 +54,13 @@ return [
     'make_featured' => 'Make featured',
     'remove_photo' => 'Remove',
     'no_photos_yet' => 'No photos uploaded yet.',
+    'back_to_listings' => 'Back to properties',
+    'listing_details' => 'Listing details',
+    'mark_sold' => 'Mark as sold',
+    'mark_rented' => 'Mark as rented',
+    'close_deal_title' => 'Close this deal',
+    'select_deal_type' => 'Select deal type',
+    'reviews_count' => 'Reviews',
 
     // Inquiries
     'customer_requests' => 'Customer requests',

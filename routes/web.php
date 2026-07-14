@@ -66,6 +66,7 @@ Route::prefix('provider')->name('provider.')->middleware(['auth', 'role:service_
     Route::get('/properties', [Provider\PropertyController::class, 'index'])->name('properties.index');
     Route::get('/properties/create', [Provider\PropertyController::class, 'create'])->name('properties.create');
     Route::post('/properties', [Provider\PropertyController::class, 'store'])->name('properties.store');
+    Route::get('/properties/{property}', [Provider\PropertyController::class, 'show'])->name('properties.show');
     Route::get('/properties/{property}/edit', [Provider\PropertyController::class, 'edit'])->name('properties.edit');
     Route::put('/properties/{property}', [Provider\PropertyController::class, 'update'])->name('properties.update');
     Route::delete('/properties/{property}', [Provider\PropertyController::class, 'destroy'])->name('properties.destroy');
@@ -114,6 +115,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/properties', [Admin\PropertyController::class, 'index'])->name('properties.index');
+    Route::get('/properties/{property}', [Admin\PropertyController::class, 'show'])->name('properties.show');
     Route::post('/properties/{property}/approve', [Admin\PropertyController::class, 'approve'])->name('properties.approve');
     Route::post('/properties/{property}/reject', [Admin\PropertyController::class, 'reject'])->name('properties.reject');
     Route::get('/properties/{property}/photos', [Admin\PropertyController::class, 'photos'])->name('properties.photos');

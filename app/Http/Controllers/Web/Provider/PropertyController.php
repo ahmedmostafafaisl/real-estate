@@ -75,6 +75,23 @@ class PropertyController extends Controller
         return redirect()->route('provider.properties.index')->with('status', __('provider.flash_listing_created'));
     }
 
+    public function show(Property $property, Request $request)
+    {
+        abort_unless($property->service_provider_id === $request->user()->serviceProvider->id, 403);
+
+        $property->load('images', 'features', 'category', 'type', 'city', 'district');
+
+        $recentInquiries = $property->inquiries()->with('user:id,name')->latest()->limit(5)->get();
+        $recentViewings = $property->viewingRequests()->with('user:id,name')->orderBy('requested_slot')->limit(5)->get();
+        $stats = [
+            'inquiries' => $property->inquiries()->count(),
+            'viewing_requests' => $property->viewingRequests()->count(),
+            'reviews' => $property->reviews()->where('status', 'published')->count(),
+        ];
+
+        return view('provider.properties.show', compact('property', 'recentInquiries', 'recentViewings', 'stats'));
+    }
+
     public function edit(Property $property, Request $request)
     {
         abort_unless($property->service_provider_id === $request->user()->serviceProvider->id, 403);

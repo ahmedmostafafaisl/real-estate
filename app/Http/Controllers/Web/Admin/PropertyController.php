@@ -20,6 +20,20 @@ class PropertyController extends Controller
         return view('admin.properties.index', compact('properties'));
     }
 
+    public function show(Property $property)
+    {
+        $property->load('images', 'features', 'category', 'type', 'city', 'district', 'serviceProvider.city');
+
+        $reviews = $property->reviews()->with('user:id,name')->latest()->limit(5)->get();
+        $reports = $property->reports()->with('user:id,name')->latest()->limit(5)->get();
+        $stats = [
+            'inquiries' => $property->inquiries()->count(),
+            'viewing_requests' => $property->viewingRequests()->count(),
+        ];
+
+        return view('admin.properties.show', compact('property', 'reviews', 'reports', 'stats'));
+    }
+
     public function approve(Property $property)
     {
         $property->approve();

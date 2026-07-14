@@ -1,6 +1,6 @@
 <x-provider-layout :title="$property->exists ? __('provider.edit_listing') : __('provider.new_listing')">
     <x-panel :title="$property->exists ? __('provider.edit_listing') : __('provider.new_listing')">
-        <form action="{{ $property->exists ? route('provider.properties.update', $property) : route('provider.properties.store') }}" method="POST" class="flex flex-col gap-3.5">
+        <form action="{{ $property->exists ? route('provider.properties.update', $property) : route('provider.properties.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3.5">
             @csrf
             @if ($property->exists) @method('PUT') @endif
 
@@ -45,6 +45,46 @@
 
             <label class="flex flex-col gap-1.5"><span class="text-xs font-semibold text-textmute">{{ __('common.description') }}</span>
                 <textarea name="description" rows="4" class="border border-line rounded-md px-2.5 py-2 text-sm">{{ old('description', $property->description) }}</textarea></label>
+
+            <div>
+                <span class="text-xs font-semibold text-textmute block mb-2">{{ __('provider.photos') }}</span>
+
+                @if ($property->exists && $property->images->count())
+                    <div class="mb-2 text-[11px] font-semibold text-textfaint uppercase">{{ __('provider.existing_photos') }}</div>
+                    <div class="grid grid-cols-4 gap-3 mb-3.5">
+                        @foreach ($property->images as $image)
+                            <div class="relative border border-line rounded-lg overflow-hidden">
+                                <img src="{{ asset('storage/' . $image->path) }}" alt="" class="w-full h-24 object-cover">
+                                @if ($image->is_featured)
+                                    <span class="absolute top-1.5 start-1.5 bg-brass text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">{{ __('provider.featured_photo') }}</span>
+                                @endif
+                                <div class="absolute inset-x-0 bottom-0 bg-black/55 p-1.5 flex items-center justify-between gap-1">
+                                    @unless ($image->is_featured)
+                                        <label class="text-[10px] text-white font-semibold flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="featured_image_id" value="{{ $image->id }}" class="scale-90">
+                                            {{ __('provider.make_featured') }}
+                                        </label>
+                                    @else
+                                        <span></span>
+                                    @endif
+                                    <label class="text-[10px] text-white font-semibold flex items-center gap-1 cursor-pointer">
+                                        <input type="checkbox" name="delete_images[]" value="{{ $image->id }}" class="scale-90 accent-kdanger">
+                                        {{ __('provider.remove_photo') }}
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @elseif ($property->exists)
+                    <p class="text-xs text-textfaint mb-3">{{ __('provider.no_photos_yet') }}</p>
+                @endif
+
+                <label class="flex flex-col gap-1.5">
+                    <span class="text-[11px] font-semibold text-textfaint uppercase">{{ __('provider.add_photos') }}</span>
+                    <input type="file" name="photos[]" multiple accept="image/*" class="border border-line rounded-md px-2.5 py-2 text-sm file:me-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-canvas file:text-xs file:font-semibold">
+                    <span class="text-[11px] text-textfaint">{{ __('provider.add_photos_hint') }}</span>
+                </label>
+            </div>
 
             <div>
                 <span class="text-xs font-semibold text-textmute block mb-2">{{ __('common.features') }}</span>

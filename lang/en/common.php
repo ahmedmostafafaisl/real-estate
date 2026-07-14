@@ -5,6 +5,7 @@ return [
     'save_changes' => 'Save changes',
     'cancel' => 'Cancel',
     'edit' => 'Edit',
+    'view' => 'View',
     'delete' => 'Delete',
     'search' => 'Search',
     'filter' => 'Filter',

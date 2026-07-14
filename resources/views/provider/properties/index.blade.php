@@ -31,6 +31,7 @@
                     <td class="py-2.5 px-2"><x-badge :status="ucfirst($p->status)" /></td>
                     <td class="py-2.5 px-2">
                         <div class="flex items-center gap-1.5 flex-wrap">
+                            <x-action-pill :href="route('provider.properties.show', $p)">{{ __('common.view') }}</x-action-pill>
                             <x-action-pill :href="route('provider.properties.edit', $p)">{{ __('common.edit') }}</x-action-pill>
                             @if ($p->status === 'draft')
                                 <form action="{{ route('provider.properties.submit', $p) }}" method="POST">@csrf<x-action-pill tone="info">{{ __('provider.submit') }}</x-action-pill></form>

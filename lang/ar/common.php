@@ -5,6 +5,7 @@ return [
     'save_changes' => 'حفظ التغييرات',
     'cancel' => 'إلغاء',
     'edit' => 'تعديل',
+    'view' => 'عرض',
     'delete' => 'حذف',
     'search' => 'بحث',
     'filter' => 'تصفية',

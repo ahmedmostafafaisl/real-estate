@@ -209,4 +209,7 @@ return [
     'flash_photo_removed' => 'تمت إزالة الصورة.',
     'photos_for' => 'صور — :title',
     'back_to_properties' => 'العودة إلى العقارات',
+    'view_details' => 'عرض',
+    'inquiries_count' => 'الاستفسارات',
+    'viewing_requests_count' => 'طلبات المعاينة',
 ];
