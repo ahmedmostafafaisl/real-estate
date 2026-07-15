@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Provider;
 
+use App\Http\Controllers\Concerns\HandlesPropertyPhotos;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Commission;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
+    use HandlesPropertyPhotos;
+
     public function index(Request $request)
     {
         $provider = $request->user()->serviceProvider;
@@ -146,30 +149,6 @@ class PropertyController extends Controller
         }
 
         return redirect()->route('provider.properties.index')->with('status', __('provider.flash_listing_updated'));
-    }
-
-    // Shared by store() and update() — saves uploaded files to the public disk and
-    // creates the matching property_images rows, continuing the sort order and
-    // making the very first photo on a brand-new listing the featured one.
-    protected function storeUploadedPhotos(Property $property, array $files): void
-    {
-        if (empty($files)) {
-            return;
-        }
-
-        $nextOrder = (int) $property->images()->max('sort_order');
-        $hasFeatured = $property->images()->where('is_featured', true)->exists();
-
-        foreach ($files as $i => $file) {
-            $path = $file->store("properties/{$property->id}", 'public');
-
-            $property->images()->create([
-                'path' => $path,
-                'type' => 'image',
-                'sort_order' => ++$nextOrder,
-                'is_featured' => ! $hasFeatured && $i === 0,
-            ]);
-        }
     }
 
     public function destroy(Property $property, Request $request)

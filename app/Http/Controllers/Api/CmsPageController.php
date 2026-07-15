@@ -46,6 +46,7 @@ class CmsPageController extends Controller
     public function destroy(CmsPage $cmsPage)
     {
         $cmsPage->delete();
-        return response()->json(['message' => 'Page deleted']);
+
+        return response()->json(['message' => __('common.api_page_deleted')]);
     }
 }

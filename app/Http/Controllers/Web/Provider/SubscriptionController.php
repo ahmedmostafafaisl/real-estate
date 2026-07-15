@@ -41,7 +41,7 @@ class SubscriptionController extends Controller
         $taxAmount = round($package->price * 0.15, 2);
 
         Invoice::create([
-            'invoice_number' => 'INV-' . strtoupper(Str::random(8)),
+            'invoice_number' => 'INV-'.strtoupper(Str::random(8)),
             'service_provider_id' => $provider->id,
             'subscription_id' => $subscription->id,
             'subtotal' => $package->price,
@@ -52,6 +52,6 @@ class SubscriptionController extends Controller
             'due_at' => now()->addDays(3),
         ]);
 
-        return redirect()->route('provider.subscription')->with('status', "Switched to the {$package->name} plan — an invoice has been generated.");
+        return redirect()->route('provider.subscription')->with('status', __('provider.flash_subscription_switched', ['plan' => $package->name]));
     }
 }

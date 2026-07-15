@@ -42,6 +42,7 @@ class PropertyTypeController extends Controller
     public function destroy(PropertyType $propertyType)
     {
         $propertyType->delete();
-        return response()->json(['message' => 'Type deleted']);
+
+        return response()->json(['message' => __('common.api_type_deleted')]);
     }
 }

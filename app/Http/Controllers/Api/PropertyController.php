@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Concerns\HandlesPropertyPhotos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
+    use HandlesPropertyPhotos;
+
     // GET /api/properties — public search & browse
     public function index(Request $request)
     {
@@ -70,7 +73,7 @@ class PropertyController extends Controller
         $data = $request->validated();
         $provider = $request->user()->serviceProvider;
 
-        abort_unless($provider->activeSubscription, 403, 'An active subscription is required to create listings.');
+        abort_unless($provider->activeSubscription, 403, __('provider.subscription_required'));
 
         $property = $provider->properties()->create([
             ...collect($data)->except(['photos'])->all(),
@@ -112,28 +115,6 @@ class PropertyController extends Controller
         }
 
         return new PropertyResource($property->fresh(['city', 'district', 'category', 'type', 'features', 'images']));
-    }
-
-    // Shared by store() and update() — same logic as the web dashboard's provider controller.
-    protected function storeUploadedPhotos(Property $property, array $files): void
-    {
-        if (empty($files)) {
-            return;
-        }
-
-        $nextOrder = (int) $property->images()->max('sort_order');
-        $hasFeatured = $property->images()->where('is_featured', true)->exists();
-
-        foreach ($files as $i => $file) {
-            $path = $file->store("properties/{$property->id}", 'public');
-
-            $property->images()->create([
-                'path' => $path,
-                'type' => 'image',
-                'sort_order' => ++$nextOrder,
-                'is_featured' => ! $hasFeatured && $i === 0,
-            ]);
-        }
     }
 
     public function destroy(Property $property, Request $request)

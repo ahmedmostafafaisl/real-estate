@@ -104,6 +104,8 @@ return [
     'pay_now' => 'Pay now',
     'paid_by_bank_transfer' => 'Mark paid by bank transfer',
     'confirm_bank_transfer' => 'Confirm you have received this payment by bank transfer outside the platform?',
+    'invoice_already_paid' => 'This invoice is already paid.',
+    'stripe_not_configured' => 'Card payments are not configured yet. Add STRIPE_KEY/STRIPE_SECRET to .env.',
     'no_invoices_yet' => 'No invoices yet.',
 
     // Commissions
@@ -148,6 +150,10 @@ return [
     'inquiries_per_100_views' => 'Inquiries per 100 views',
     'flash_payment_received' => 'Payment received — invoice marked as paid.',
     'flash_checkout_pending' => "Payment submitted — we'll mark the invoice paid as soon as it's confirmed (usually within a few seconds).",
+    'subscription_required' => 'An active subscription is required to create listings.',
+    'invoice_already_paid' => 'This invoice is already paid.',
+    'payments_not_configured' => 'Card payments are not configured yet. Contact support.',
+    'flash_subscription_switched' => 'Switched to the :plan plan — an invoice has been generated.',
     'flash_employee_added' => 'Employee added.',
     'flash_employee_removed' => 'Employee removed.',
     'flash_inquiry_responded' => 'Marked as responded.',

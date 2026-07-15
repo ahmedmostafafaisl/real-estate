@@ -205,6 +205,7 @@ return [
     'flash_property_rejected' => 'تم رفض العقار.',
     'flash_settings_saved' => 'تم حفظ الإعدادات.',
     'flash_notification_updated' => 'تم تحديث قالب الإشعار.',
+    'flash_permissions_updated' => 'تم تحديث الصلاحيات لدور :role.',
     'manage_photos' => 'إدارة الصور',
     'flash_photo_removed' => 'تمت إزالة الصورة.',
     'photos_for' => 'صور — :title',

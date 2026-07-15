@@ -38,6 +38,7 @@ class PropertyCategoryController extends Controller
     public function destroy(PropertyCategory $propertyCategory)
     {
         $propertyCategory->delete();
-        return response()->json(['message' => 'Category deleted']);
+
+        return response()->json(['message' => __('common.api_category_deleted')]);
     }
 }

@@ -104,6 +104,8 @@ return [
     'pay_now' => 'الدفع الآن',
     'paid_by_bank_transfer' => 'تحديد كمدفوع عبر حوالة بنكية',
     'confirm_bank_transfer' => 'هل تؤكد استلام هذه الدفعة عبر حوالة بنكية خارج المنصة؟',
+    'invoice_already_paid' => 'تم دفع هذه الفاتورة بالفعل.',
+    'stripe_not_configured' => 'الدفع بالبطاقة غير مُفعّل بعد. أضف STRIPE_KEY وSTRIPE_SECRET في ملف .env.',
     'no_invoices_yet' => 'لا توجد فواتير بعد.',
 
     // Commissions
@@ -148,6 +150,10 @@ return [
     'inquiries_per_100_views' => 'استفسار لكل 100 مشاهدة',
     'flash_payment_received' => 'تم استلام الدفعة — تم تحديد الفاتورة كمدفوعة.',
     'flash_checkout_pending' => 'تم إرسال الدفعة — سيتم تحديد الفاتورة كمدفوعة فور تأكيدها (عادة خلال ثوانٍ قليلة).',
+    'subscription_required' => 'يلزم اشتراك نشط لإنشاء عقارات جديدة.',
+    'invoice_already_paid' => 'تم دفع هذه الفاتورة مسبقاً.',
+    'payments_not_configured' => 'الدفع بالبطاقة غير مُفعّل حالياً. يرجى التواصل مع الدعم الفني.',
+    'flash_subscription_switched' => 'تم التبديل إلى باقة :plan — تم إنشاء فاتورة جديدة.',
     'flash_employee_added' => 'تمت إضافة الموظف.',
     'flash_employee_removed' => 'تمت إزالة الموظف.',
     'flash_inquiry_responded' => 'تم تحديده كمردود عليه.',

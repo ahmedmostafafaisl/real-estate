@@ -24,6 +24,15 @@ class LoginController extends Controller
             return back()->withErrors(['email' => __('auth.bad_credentials')])->onlyInput('email');
         }
 
+        // Auth::attempt() only checks email/password — it has no idea about our
+        // own is_active flag. Without this, the admin "Suspend" button flips a
+        // database column that nothing ever actually enforces.
+        if (! Auth::user()->is_active) {
+            Auth::logout();
+
+            return back()->withErrors(['email' => __('auth.account_suspended')])->onlyInput('email');
+        }
+
         $request->session()->regenerate();
         $user = Auth::user();
 

@@ -56,4 +56,11 @@ return [
     'developer' => 'Developer',
 
     'rights_reserved' => 'All rights reserved.',
+    'api_payment_refunded' => 'Payment refunded',
+    'api_type_deleted' => 'Type deleted',
+    'api_logged_out' => 'Logged out',
+    'api_page_deleted' => 'Page deleted',
+    'api_category_deleted' => 'Category deleted',
+    'api_property_deleted' => 'Property deleted',
+    'api_subscription_required' => 'An active subscription is required to create listings.',
 ];

@@ -25,8 +25,8 @@ class InvoiceController extends Controller
     public function checkout(Invoice $invoice, Request $request, StripeService $stripe)
     {
         abort_unless($invoice->service_provider_id === $request->user()->serviceProvider->id, 403);
-        abort_if($invoice->status === 'paid', 400, 'This invoice is already paid.');
-        abort_unless($stripe->isConfigured(), 503, 'Card payments are not configured yet. Add STRIPE_KEY/STRIPE_SECRET to .env.');
+        abort_if($invoice->status === 'paid', 400, __('provider.invoice_already_paid'));
+        abort_unless($stripe->isConfigured(), 503, __('provider.payments_not_configured'));
 
         $session = $stripe->createCheckoutSession(
             $invoice,
@@ -53,7 +53,7 @@ class InvoiceController extends Controller
     public function pay(Invoice $invoice, Request $request)
     {
         abort_unless($invoice->service_provider_id === $request->user()->serviceProvider->id, 403);
-        abort_if($invoice->status === 'paid', 400, 'This invoice is already paid.');
+        abort_if($invoice->status === 'paid', 400, __('provider.invoice_already_paid'));
 
         Payment::create([
             'invoice_id' => $invoice->id,

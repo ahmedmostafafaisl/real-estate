@@ -205,6 +205,7 @@ return [
     'flash_property_rejected' => 'Property rejected.',
     'flash_settings_saved' => 'Settings saved.',
     'flash_notification_updated' => 'Notification template updated.',
+    'flash_permissions_updated' => 'Permissions updated for :role.',
     'manage_photos' => 'Manage photos',
     'flash_photo_removed' => 'Photo removed.',
     'photos_for' => 'Photos — :title',

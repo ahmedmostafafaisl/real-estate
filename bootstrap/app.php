@@ -27,6 +27,13 @@ return Application::configure(basePath: dirname(__DIR__))
             SetLocale::class,
         ]);
 
+        // Same middleware, but for API requests it reads the Accept-Language
+        // header instead of session (see SetLocale::handle) — the Flutter app
+        // sends that header on every call.
+        $middleware->api(append: [
+            SetLocale::class,
+        ]);
+
         // Stripe's webhook is a server-to-server POST with no session/CSRF token —
         // it's verified instead by its own signature check in StripeWebhookController.
         $middleware->validateCsrfTokens(except: [

@@ -30,6 +30,6 @@ class RoleController extends Controller
         $data = $request->validate(['permissions' => ['nullable', 'array']]);
         $role->syncPermissions($data['permissions'] ?? []);
 
-        return back()->with('status', "Permissions updated for {$role->name}.");
+        return back()->with('status', __('admin.flash_permissions_updated', ['role' => $role->name]));
     }
 }

@@ -56,4 +56,11 @@ return [
     'developer' => 'مطوّر',
 
     'rights_reserved' => 'جميع الحقوق محفوظة.',
+    'api_payment_refunded' => 'تم استرداد الدفعة',
+    'api_type_deleted' => 'تم حذف النوع',
+    'api_logged_out' => 'تم تسجيل الخروج',
+    'api_page_deleted' => 'تم حذف الصفحة',
+    'api_category_deleted' => 'تم حذف التصنيف',
+    'api_property_deleted' => 'تم حذف العقار',
+    'api_subscription_required' => 'يتطلب إنشاء عقار وجود اشتراك نشط.',
 ];

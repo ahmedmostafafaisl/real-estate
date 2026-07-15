@@ -28,7 +28,7 @@ class PaymentController extends Controller
         // and the webhook flips status to paid/failed. Modeled synchronously here.
         $payment = Payment::create([
             'invoice_id' => $invoice->id,
-            'transaction_ref' => 'TXN-' . strtoupper(Str::random(10)),
+            'transaction_ref' => 'TXN-'.strtoupper(Str::random(10)),
             'method' => $data['method'],
             'amount' => $invoice->total,
             'status' => 'paid',
@@ -46,6 +46,6 @@ class PaymentController extends Controller
         $payment->update(['status' => 'refunded']);
         $payment->invoice->update(['status' => 'refunded']);
 
-        return response()->json(['message' => 'Payment refunded', 'payment' => $payment]);
+        return response()->json(['message' => __('common.api_payment_refunded'), 'payment' => $payment]);
     }
 }
