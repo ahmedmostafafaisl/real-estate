@@ -122,7 +122,7 @@ class PropertyController extends Controller
         abort_unless($property->service_provider_id === $request->user()->serviceProvider?->id, 403);
         $property->delete();
 
-        return response()->json(['message' => 'Property deleted']);
+        return response()->json(['message' => __('common.api_property_deleted')]);
     }
 
     // POST /api/provider/properties/{property}/submit

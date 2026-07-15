@@ -90,7 +90,7 @@ class SubscriptionTest extends TestCase
 
     public function test_customer_cannot_access_the_provider_subscription_page(): void
     {
-        $customer = User::factory()->customer()->create();
+        $customer = User::factory()->customer()->create(['is_active' => true]);
         $customer->assignRole('customer');
 
         $this->actingAs($customer)->get('/provider/subscription')->assertForbidden();

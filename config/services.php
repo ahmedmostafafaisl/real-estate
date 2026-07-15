@@ -39,7 +39,7 @@ return [
         // Path to the service-account JSON downloaded from your Firebase project's
         // Settings > Service Accounts > Generate new private key. Not included here —
         // this is a secret credential file, not something to commit.
-        'credentials' => env('FIREBASE_CREDENTIALS', storage_path('app/firebase-credentials.json')),
+        'credentials' => env('FIREBASE_CREDENTIALS', storage_path('app/firebase/firebase-credentials.json')),
     ],
 
     'stripe' => [

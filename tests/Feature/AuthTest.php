@@ -33,7 +33,7 @@ class AuthTest extends TestCase
 
     public function test_registered_user_can_log_in(): void
     {
-        $user = User::factory()->customer()->create(['password' => bcrypt('password')]);
+        $user = User::factory()->customer()->create(['password' => bcrypt('password'), 'is_active' => true]);
         $user->assignRole('customer');
 
         $response = $this->post('/login', [
@@ -47,7 +47,7 @@ class AuthTest extends TestCase
 
     public function test_login_fails_with_wrong_password(): void
     {
-        $user = User::factory()->customer()->create(['password' => bcrypt('password')]);
+        $user = User::factory()->customer()->create(['password' => bcrypt('password'), 'is_active' => true]);
 
         $response = $this->from('/login')->post('/login', [
             'email' => $user->email,

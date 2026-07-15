@@ -51,7 +51,7 @@ class FavoriteTest extends TestCase
             'published_at' => now(),
         ]);
 
-        $this->customer = User::factory()->customer()->create();
+        $this->customer = User::factory()->customer()->create(['is_active' => true]);
         $this->customer->assignRole('customer');
     }
 
@@ -91,7 +91,7 @@ class FavoriteTest extends TestCase
         Sanctum::actingAs($this->customer);
         $this->postJson("/api/properties/{$this->property->id}/favorite");
 
-        $otherCustomer = User::factory()->customer()->create();
+        $otherCustomer = User::factory()->customer()->create(['is_active' => true]);
         $otherCustomer->assignRole('customer');
         Sanctum::actingAs($otherCustomer);
 
